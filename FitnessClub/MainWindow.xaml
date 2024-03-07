@@ -52,7 +52,7 @@
                     </MenuItem>
                     <MenuItem HorizontalAlignment="Right">
                         <MenuItem.Header>
-                            <Image Width="50" Source="images\klipartz.com.png"/>
+                            <Image Width="40" Source="images\klipartz.com.png"/>
                         </MenuItem.Header>
                     </MenuItem>
                 </Menu>
