@@ -26,17 +26,12 @@ namespace FitnessClub
         public MainWindow()
         {
             InitializeComponent();
-            SqlConnection connection = new SqlConnection(connectionString);
-            connection.Open();
-            string cmd = $"SELECT * FROM Client";
-            SqlCommand createCommand = new SqlCommand(cmd, connection);
-            createCommand.ExecuteNonQuery();
-            SqlDataAdapter dataAdp = new SqlDataAdapter(createCommand);
-            DataTable dt = new DataTable("Client");
-            dataAdp.Fill(dt);
-           // datagrid.ItemsSource = dt.DefaultView;
-            connection.Close();
-
+        }
+        public void TrainersClick(object sender, RoutedEventArgs e)
+        {
+            //this.Close();
+            Trainers t=new Trainers();
+            t.Show();
         }
     }
 }

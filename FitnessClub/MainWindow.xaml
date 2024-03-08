@@ -16,11 +16,12 @@
     </Window.Resources>
     <DockPanel Width="Auto">
         <ScrollViewer HorizontalScrollBarVisibility="Auto">
+            <Viewbox Stretch="Fill">
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
                 <Grid>
-                    <Rectangle Width="768" Height="450">
+                    <Rectangle Height="450" MinWidth="768" >
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="images\Main.jpg"></ImageBrush>
+                            <ImageBrush ImageSource="images\Main.jpg" ></ImageBrush>
                         </Rectangle.Fill>
                     </Rectangle>
                     <TextBlock Margin="105" Foreground="White" FontSize="25">Fitness Club</TextBlock>
@@ -29,7 +30,12 @@
                         of activities. Our trainers will help you achieve your fitness goals</TextBlock>
                 </Grid>
                 <Menu Background="Red" >
-                    <MenuItem >
+                        <Menu.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <DockPanel/>
+                            </ItemsPanelTemplate>
+                        </Menu.ItemsPanel>
+                        <MenuItem >
                         <MenuItem.Header >Types Of Sport Activities</MenuItem.Header>
                         <MenuItem>
                             <MenuItem.Header>Stretching</MenuItem.Header>
@@ -47,7 +53,7 @@
                     <MenuItem >
                         <MenuItem.Header>Subscribers</MenuItem.Header>
                     </MenuItem>
-                    <MenuItem >
+                    <MenuItem Click="TrainersClick">
                         <MenuItem.Header>Trainers</MenuItem.Header>
                     </MenuItem>
                     <MenuItem HorizontalAlignment="Right">
@@ -63,6 +69,7 @@
                 </TextBlock>
                 </StackPanel>
             </StackPanel>
+            </Viewbox>
         </ScrollViewer>
         
     </DockPanel>

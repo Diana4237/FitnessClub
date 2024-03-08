@@ -17,6 +17,11 @@
     <DockPanel>
         <StackPanel>
             <Menu Background="Red" >
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <DockPanel/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
                 <MenuItem >
                     <MenuItem.Header >Types Of Sport Activities</MenuItem.Header>
                     <MenuItem>
