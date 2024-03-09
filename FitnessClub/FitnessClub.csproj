@@ -128,5 +128,23 @@
   <ItemGroup>
     <Resource Include="images\Cardio.JPG" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\step1.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\step2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\step3.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\pilates3.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\stretch.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\pilates2.JPG" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

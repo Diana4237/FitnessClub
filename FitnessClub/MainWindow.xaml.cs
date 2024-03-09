@@ -88,6 +88,7 @@ namespace FitnessClub
                 }
                 MenuItem Train = new MenuItem { Header = "Trainers" };
                 MenuItem time = new MenuItem { Header = "Timing" };
+                MenuItem sub = new MenuItem { Header = "Subscriptions" };
                 Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
                 menu.Items.Add(inf);

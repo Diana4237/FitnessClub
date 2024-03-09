@@ -18,9 +18,9 @@
         <StackPanel DockPanel.Dock="Top" Name="Menustack"></StackPanel>
         <ScrollViewer HorizontalScrollBarVisibility="Auto">
             <StackPanel>
-                <StackPanel DockPanel.Dock="Top">
+                <StackPanel DockPanel.Dock="Top" >
                     <Grid>
-                        <Rectangle Height="180" MinWidth="768" >
+                        <Rectangle Height="200" MinWidth="768" >
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="images\Cardio.JPG" ></ImageBrush>
                             </Rectangle.Fill>
@@ -28,18 +28,91 @@
                         <TextBlock Margin="52,73,52,73" Foreground="White" FontSize="35" FontWeight="Bold">Cardio Training</TextBlock>
 
                     </Grid>
-                    <TextBlock FontSize="25" FontWeight="Bold" HorizontalAlignment="Center">Step</TextBlock>
+                    <TextBlock FontSize="25" FontWeight="Bold" Margin="50,10">Step</TextBlock>
                     <Grid>
                         <Grid.RowDefinitions/>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                     
-                    <TextBlock></TextBlock>
-                        <Image></Image>
+                        <StackPanel Grid.Column="0" Grid.Row="0" Margin="15" Width="400">
+                        <TextBlock TextWrapping="Wrap" >Step aerobics is definitely not about boring gym classes that you want to quit after a couple of weeks. The training is based on dance moves, which means that it always turns out to be energetic, fun and effective. It helps to simultaneously improve your figure, mood and health and just have fun in a team of like-minded people.</TextBlock>
+                            <TextBlock TextWrapping="Wrap" Margin="0,15">Step aerobics involves alternating steps on a hill. Their movements are combined into special combinations — bundles. The training always takes place in an intense rhythm and with appropriate music. From the outside and according to the sensations, Step Aerobics resembles a sports dance, which helps to develop coordination, improve the work of the heart and lungs, and "sculpt" a beautiful figure.</TextBlock>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+                        <Image Width="140" Source="images/step1.jpeg" Margin="10,100,0,10"></Image>
+                            <Image Width="190" Source="images/step2.jpg" Margin="10,100,0,10"></Image>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0">
+                            <Image Width="190" Source="images/step3.jpg"></Image>
+                        </StackPanel>
                     </Grid>
                 </StackPanel>
+
+                <Rectangle Height="3" Fill="Red" Margin="10,40,10,10"></Rectangle>
+
+                <StackPanel DockPanel.Dock="Top">
+                    <Grid>
+                        <Rectangle Height="200" MinWidth="768" >
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="images\stretch.JPG" ></ImageBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Margin="52,73,52,73" Foreground="White" FontSize="35" FontWeight="Bold">Flexibility training</TextBlock>
+
+                    </Grid>
+                    <TextBlock FontSize="25" FontWeight="Bold" Margin="50,10">Yoga</TextBlock>
+                    <Grid>
+                        <Grid.RowDefinitions/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Grid.Row="0" Margin="15" Width="400">
+                            <TextBlock TextWrapping="Wrap" >Step aerobics is definitely not about boring gym classes that you want to quit after a couple of weeks. The training is based on dance moves, which means that it always turns out to be energetic, fun and effective. It helps to simultaneously improve your figure, mood and health and just have fun in a team of like-minded people.</TextBlock>
+                            <TextBlock TextWrapping="Wrap" Margin="0,15">Step aerobics involves alternating steps on a hill. Their movements are combined into special combinations — bundles. The training always takes place in an intense rhythm and with appropriate music. From the outside and according to the sensations, Step Aerobics resembles a sports dance, which helps to develop coordination, improve the work of the heart and lungs, and "sculpt" a beautiful figure.</TextBlock>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+                            <Image Width="140" Source="images/pilates3.jpg" Margin="10,100"></Image>
+                            <Image Width="150" Source="images/pilates2.jpg"></Image>
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock FontSize="25" FontWeight="Bold" Margin="50,10">Pilates</TextBlock>
+                    <Grid>
+                        <Grid.RowDefinitions/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Grid.Row="0" Margin="15" Width="400">
+                            <TextBlock TextWrapping="Wrap" >Step aerobics is definitely not about boring gym classes that you want to quit after a couple of weeks. The training is based on dance moves, which means that it always turns out to be energetic, fun and effective. It helps to simultaneously improve your figure, mood and health and just have fun in a team of like-minded people.</TextBlock>
+                            <TextBlock TextWrapping="Wrap" Margin="0,15">Step aerobics involves alternating steps on a hill. Their movements are combined into special combinations — bundles. The training always takes place in an intense rhythm and with appropriate music. From the outside and according to the sensations, Step Aerobics resembles a sports dance, which helps to develop coordination, improve the work of the heart and lungs, and "sculpt" a beautiful figure.</TextBlock>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+                            <Image Width="140" Source="images/pilates3.jpg" Margin="10,100"></Image>
+                            <Image Width="150" Source="images/pilates2.jpg"></Image>
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock FontSize="25" FontWeight="Bold" Margin="50,10">Stretching</TextBlock>
+                    <Grid>
+                        <Grid.RowDefinitions/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Grid.Row="0" Margin="15" Width="400">
+                            <TextBlock TextWrapping="Wrap" >Step aerobics is definitely not about boring gym classes that you want to quit after a couple of weeks. The training is based on dance moves, which means that it always turns out to be energetic, fun and effective. It helps to simultaneously improve your figure, mood and health and just have fun in a team of like-minded people.</TextBlock>
+                            <TextBlock TextWrapping="Wrap" Margin="0,15">Step aerobics involves alternating steps on a hill. Their movements are combined into special combinations — bundles. The training always takes place in an intense rhythm and with appropriate music. From the outside and according to the sensations, Step Aerobics resembles a sports dance, which helps to develop coordination, improve the work of the heart and lungs, and "sculpt" a beautiful figure.</TextBlock>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+                            <Image Width="140" Source="images/pilates3.jpg" Margin="10,100"></Image>
+                            <Image Width="150" Source="images/pilates2.jpg"></Image>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+
             </StackPanel>
         </ScrollViewer>
     </DockPanel>
