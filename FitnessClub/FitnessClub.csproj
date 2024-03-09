@@ -55,14 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Information.xaml.cs">
+      <DependentUpon>Information.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Trainers.xaml.cs">
       <DependentUpon>Trainers.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainAdmin.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainClient.xaml">
+    <Compile Include="TypesActivities.xaml.cs">
+      <DependentUpon>TypesActivities.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Information.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -75,17 +77,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DB.cs" />
-    <Compile Include="MainAdmin.xaml.cs">
-      <DependentUpon>MainAdmin.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainClient.xaml.cs">
-      <DependentUpon>MainClient.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Trainers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TypesActivities.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -124,6 +124,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\trainers.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Cardio.JPG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

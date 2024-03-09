@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessClub"
         mc:Ignorable="d"
-        Title="Trainers" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="Trainers" Height="650" Width="800">
     <Window.Resources>
         <Style TargetType="MenuItem">
             <Setter Property="Padding" Value="20"/>
@@ -15,43 +16,8 @@
 
     </Window.Resources>
     <DockPanel>
-        <StackPanel DockPanel.Dock="Top">
-            <Menu Background="Red" >
-                <Menu.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <DockPanel/>
-                    </ItemsPanelTemplate>
-                </Menu.ItemsPanel>
-                <MenuItem >
-                    <MenuItem.Header >Types Of Sport Activities</MenuItem.Header>
-                    <MenuItem>
-                        <MenuItem.Header>Stretching</MenuItem.Header>
-                    </MenuItem>
-                    <MenuItem>
-                        <MenuItem.Header>Yoga</MenuItem.Header>
-                    </MenuItem>
-                    <MenuItem>
-                        <MenuItem.Header>Pilates</MenuItem.Header>
-                    </MenuItem>
-                    <MenuItem>
-                        <MenuItem.Header>Step</MenuItem.Header>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem >
-                    <MenuItem.Header>Subscribers</MenuItem.Header>
-                </MenuItem>
-                <MenuItem >
-                    <MenuItem.Header>Trainers</MenuItem.Header>
-                </MenuItem>
-                <MenuItem >
-                    <MenuItem.Header>Timings</MenuItem.Header>
-                </MenuItem>
-                <MenuItem HorizontalAlignment="Right">
-                    <MenuItem.Header>
-                        <Image Width="40" Source="images\klipartz.com.png"/>
-                    </MenuItem.Header>
-                </MenuItem>
-            </Menu>
+        <StackPanel DockPanel.Dock="Top" Name="Menustack">
+            
         </StackPanel>
         <ScrollViewer VerticalScrollBarVisibility="Visible">
 

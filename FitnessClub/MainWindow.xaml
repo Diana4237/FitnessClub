@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessClub"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+         WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="650" Width="800">
     <Window.Resources>
         <Style TargetType="MenuItem">
             <Setter Property="Padding" Value="20"/>
@@ -29,13 +30,17 @@
                     <TextBlock Margin="-255,225,0,0" Width="300" Foreground="Gray" TextWrapping="Wrap" FontSize="15">We will provide you with a wide range 
                         of activities. Our trainers will help you achieve your fitness goals</TextBlock>
                 </Grid>
-                <Menu Background="Red" >
+                    <StackPanel Name="Menustack"></StackPanel>
+                <!--<Menu Background="Red" Name="menuNoLogin">
                         <Menu.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <DockPanel/>
                             </ItemsPanelTemplate>
                         </Menu.ItemsPanel>
-                        <MenuItem >
+                        <MenuItem IsEnabled="False">
+                            <MenuItem.Header>Infirmation About Club</MenuItem.Header>
+                        </MenuItem>
+                        <MenuItem Click="TypeAct">
                         <MenuItem.Header >Types Of Sport Activities</MenuItem.Header>
                         <MenuItem>
                             <MenuItem.Header>Stretching</MenuItem.Header>
@@ -61,7 +66,7 @@
                             <Image Width="40" Source="images\klipartz.com.png"/>
                         </MenuItem.Header>
                     </MenuItem>
-                </Menu>
+                </Menu>-->
                 <StackPanel>
                     <TextBlock TextWrapping="Wrap" Width="700" Padding="10" FontSize="15">Improvement of the general physical condition. Development of flexibility, coordination, 
                     correction of posture, getting rid of shortness of breath. Improvement of metabolic processes. Slowing down chemical 

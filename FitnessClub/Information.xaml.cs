@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace FitnessClub
 {
     /// <summary>
-    /// Логика взаимодействия для MainClient.xaml
+    /// Логика взаимодействия для Information.xaml
     /// </summary>
-    public partial class MainClient : Window
+    public partial class Information : Window
     {
-        public MainClient()
+        public Information()
         {
             InitializeComponent();
         }
