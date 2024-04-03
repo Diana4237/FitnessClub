@@ -30,7 +30,9 @@ namespace FitnessClub
             Menu menu = new Menu { Background = new SolidColorBrush(Colors.Red), ItemsPanel = it };
 
             MenuItem inf = new MenuItem { Header = "Infirmation About Club" };
+            inf.Click += new RoutedEventHandler(Inform);
             MenuItem act = new MenuItem { Header = "Types Of Sport Activities" };
+            act.Click += new RoutedEventHandler(TypeAct);
             string sqlExpression = "SELECT Title FROM Type_subscription";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -50,6 +52,7 @@ namespace FitnessClub
             MenuItem Train = new MenuItem { Header = "Trainers", IsEnabled=false };
             Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
             MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
+            account.Click += new RoutedEventHandler(AccountClick);
             menu.Items.Add(inf);
             menu.Items.Add(act);
             menu.Items.Add(Train);
@@ -368,6 +371,21 @@ namespace FitnessClub
                 }
             }
             return null;
+        }
+        public void AccountClick(object sender, EventArgs e)
+        {
+            Autorization autorization = new Autorization();
+            autorization.Show();
+        }
+        public void Inform(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+        }
+        public void TypeAct(object sender, RoutedEventArgs e)
+        {
+            TypesActivities types = new TypesActivities();
+            types.Show();
         }
     }
 }
