@@ -171,5 +171,8 @@
   <ItemGroup>
     <Resource Include="images\auth.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\StepClass.JPG" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

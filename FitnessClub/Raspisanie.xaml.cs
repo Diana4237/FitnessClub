@@ -21,21 +21,25 @@ namespace FitnessClub
     /// </summary>
     public partial class Raspisanie : Window
     {
-      public  int id_subsc=0;
-        public int id_class=0;
+        
         public int id_client;
         public int Id_hall;
-        public int id_type;
-        public DateTime date_time;
+        DateTime date_time;
+        int id_type = 0;
+        int id_subsc = 0;
         public int Id_staff;
         public string title;
-        public int cost;
+        public decimal cost;
         public string fio;
-        public byte[] photo;  
+        public byte[] photo;
+        int id_class = 0;
         string connectionString = @"Data Source=-PC\MSSQLSERVER01; Initial Catalog=FitnessClub;Integrated Security=True;";
         public Raspisanie(int idRole, int id_user)
         {
             InitializeComponent();
+
+            
+
 
             if (idRole == 1)
             {
@@ -86,25 +90,24 @@ namespace FitnessClub
 
                         while (reader1.Read())
                         {
-                           int Id_sub= reader1.GetInt16(0);
-                            id_subsc = Id_sub;
-                            int Id_type=reader1.GetInt16(1);
-                            id_type = Id_type;
+                            id_subsc = reader1.GetInt32(0);
+
+                            id_type = reader1.GetInt32(1);
+                             
                         }
                     }
                     reader1.Close();
-                    connection.Close();
                 }
 
 
 
 
                 string sqlExp1 = $"SELECT Id_Class FROM Timing WHERE Id_subscription='{id_subsc}'";
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlConnection connection1 = new SqlConnection(connectionString))
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(sqlExp1, connection);
-                    SqlDataReader reader2 = command.ExecuteReader();
+                    connection1.Open();
+                    SqlCommand command2 = new SqlCommand(sqlExp1, connection1);
+                    SqlDataReader reader2 = command2.ExecuteReader();
 
                     if (reader2.HasRows)
                     {
@@ -117,17 +120,16 @@ namespace FitnessClub
                         }
                     }
                     reader2.Close();
-                    connection.Close();
                 }
 
 
                
                 string sqlExp2 = $"SELECT Date_Time, Id_Staff FROM Class WHERE Id_Class= '{id_class}'";
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlConnection connection2 = new SqlConnection(connectionString))
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(sqlExp2, connection);
-                    SqlDataReader reader3 = command.ExecuteReader();
+                    connection2.Open();
+                    SqlCommand command3 = new SqlCommand(sqlExp2, connection2);
+                    SqlDataReader reader3 = command3.ExecuteReader();
 
                     if (reader3.HasRows)
                     {
@@ -141,16 +143,15 @@ namespace FitnessClub
                         }
                     }
                     reader3.Close();
-                    connection.Close();
                 }
 
 
                 string sqlExp5 = $"SELECT FirstName, LastName, Patronymic, Photo FROM Staff WHERE Id_staff= '{Id_staff}'";
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlConnection connection4 = new SqlConnection(connectionString))
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(sqlExp5, connection);
-                    SqlDataReader reader4 = command.ExecuteReader();
+                    connection4.Open();
+                    SqlCommand command4 = new SqlCommand(sqlExp5, connection4);
+                    SqlDataReader reader4 = command4.ExecuteReader();
 
                     if (reader4.HasRows)
                     {
@@ -162,22 +163,22 @@ namespace FitnessClub
                             string s3= reader4.GetString(2);
 
                            fio = s1+s2+s3;
-                           photo= (byte[])reader4["Photo"];
-
+                           // if ((byte[])reader4["Photo"] != null) { 
+                           //photo= (byte[])reader4["Photo"];
+                           // }
                         }
                     }
                     reader4.Close();
-                    connection.Close();
                 }
 
 
 
                 string sqlExp4 = $"SELECT Title,Cost FROM Type_subscription WHERE Id_type_subscription= '{id_type}'";
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlConnection connection5 = new SqlConnection(connectionString))
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(sqlExp4, connection);
-                    SqlDataReader reader5 = command.ExecuteReader();
+                    connection5.Open();
+                    SqlCommand command5 = new SqlCommand(sqlExp4, connection5);
+                    SqlDataReader reader5 = command5.ExecuteReader();
 
                     if (reader5.HasRows)
                     {
@@ -185,29 +186,34 @@ namespace FitnessClub
                         while (reader5.Read())
                         {
                             title = reader5.GetString(0);
-                            cost = reader5.GetInt32(1);
+                            cost = reader5.GetDecimal(1);
 
                         }
                     }
                     reader5.Close();
-                    connection.Close();
                 }
-
-                text1.Text = title;
-                text2.Text= date_time.ToString();
-                text3.Text= cost.ToString();
-                text4.Text= fio.ToString();
-
-                BitmapImage bitmapImage = new BitmapImage();
-                using (MemoryStream stream = new MemoryStream(photo))
+                if (title == "Step")
                 {
-                    bitmapImage.BeginInit();
-                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmapImage.StreamSource = stream;
-                    bitmapImage.EndInit();
-                }
+                    ImageBrush myBrush = new ImageBrush {ImageSource= 
+                        new BitmapImage(new Uri(@"\images\StepClass.JPG")) };
+                    grandStack.Background = myBrush;
 
-                img.Source= bitmapImage;
+                }
+                text1.Text += title;
+                text2.Text+= date_time.ToString();
+                text3.Text+= cost.ToString();
+                text4.Text+= fio.ToString();
+
+                //BitmapImage bitmapImage = new BitmapImage();
+                //using (MemoryStream stream = new MemoryStream(photo))
+                //{
+                //    bitmapImage.BeginInit();
+                //    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                //    bitmapImage.StreamSource = stream;
+                //    bitmapImage.EndInit();
+                //}
+
+                //img.Source= bitmapImage;
 
 
 

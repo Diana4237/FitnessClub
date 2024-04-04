@@ -21,18 +21,16 @@
         <ScrollViewer VerticalScrollBarVisibility="Visible">
 
             <Grid DockPanel.Dock="Top">
-                <Grid.Background>
-                    <ImageBrush ImageSource="images\trainers.JPG" ></ImageBrush>
-                </Grid.Background>
+               
                 
-                <Grid x:Name="gr1"  Margin="100" Background="white">
+                <StackPanel x:Name="grandStack"  Margin="100" Background="white">
                     <TextBlock Text="Your Class" FontSize="35"  Padding="10" />
                     <TextBlock x:Name="text1"  FontSize="35"  Padding="10" />
                     <TextBlock x:Name="text2"  FontSize="35"  Padding="10" />
                     <TextBlock  x:Name="text3"  FontSize="35"  Padding="10" />
                     <TextBlock  x:Name="text4"  FontSize="35"  Padding="10" />
                     <Image x:Name="img"/>
-                </Grid>
+                </StackPanel>
                 
             </Grid>
         </ScrollViewer>
