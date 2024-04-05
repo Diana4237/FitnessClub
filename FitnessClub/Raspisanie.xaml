@@ -5,34 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessClub"
         mc:Ignorable="d"
-        Title="Raspisanie" Height="450" Width="800">
+        Title="Raspisanie" Height="650" Width="800">
     <Window.Resources>
         <Style TargetType="MenuItem">
             <Setter Property="Padding" Value="20"/>
             <Setter Property="Background" Value="Red"/>
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
         </Style>
 
     </Window.Resources>
     <DockPanel>
-        <StackPanel DockPanel.Dock="Top" Name="Menustack">
-
-        </StackPanel>
+        <StackPanel DockPanel.Dock="Top" Name="Menustack"></StackPanel>
         <ScrollViewer VerticalScrollBarVisibility="Visible">
-
-            <Grid DockPanel.Dock="Top">
-               
+            <ScrollViewer.Background>
+                <ImageBrush ImageSource="images\BackTiming.jpg" Opacity="0.9"></ImageBrush>
+            </ScrollViewer.Background>
+                <Canvas x:Name="grandStack"  Margin="100" >
+                <TextBlock FontSize="26" Canvas.Top="30" Canvas.Left="-20" Name="NameTren" FontWeight="Bold">
+                    <TextBlock.RenderTransform>
+                        <RotateTransform Angle="+90"/>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <Polygon Points="50,0 100,25 100,75 50,100 0,75 0,25" x:Name="poly1" Stroke="Black" StrokeThickness="2" Panel.ZIndex="2" Canvas.Top="-60" Canvas.Left="260">
+                    <Polygon.RenderTransform>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </Polygon.RenderTransform>
+                </Polygon>
+                <Polygon Points="50,0 100,25 100,75 50,100 0,75 0,25" x:Name="poly2" Stroke="Black" StrokeThickness="2" Panel.ZIndex="2" Canvas.Top="170" Canvas.Left="350">
+                   
+                </Polygon>
+                <Polygon Points="50,0 100,25 100,75 50,100 0,75 0,25" x:Name="poly3" Stroke="Black" StrokeThickness="2" Panel.ZIndex="2" Canvas.Top="280" Canvas.Left="300"/>
+                    <Ellipse Height="350" Width="350" Name="trener" Stroke="Red" StrokeThickness="20" Canvas.Left="-20" Canvas.Top="10">
+                    <Ellipse.Effect>
+                        <DropShadowEffect ShadowDepth="14" Direction="310" Color="Black" Opacity="0.7" BlurRadius="24"/>
+                       
+                    </Ellipse.Effect>
+                </Ellipse>
+                <TextBlock Text="Your Class" FontSize="45" Canvas.Left="400" Canvas.Top="-40" Padding="10" Foreground="Red" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Opacity="0.6"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Line X1="210"  Stroke="Red" StrokeThickness="3" Canvas.Top="30" Canvas.Left="412"/>
+                <TextBlock x:Name="Class"  FontSize="23" Foreground="Red" Padding="10" Canvas.Left="500" Canvas.Top="30" FontWeight="Bold"/>
+                <TextBlock x:Name="Time"  FontSize="23"  Padding="10" Canvas.Left="500"  Canvas.Top="100" FontWeight="Bold"/>
+                <TextBlock  x:Name="Date"  FontSize="20"  Padding="10" Canvas.Left="480"  Canvas.Top="140" />
+                <TextBlock  x:Name="CostClass"  FontSize="17" Foreground="Red"  Padding="10" Canvas.Left="490" Text="Cost:" Canvas.Top="180" />
+                <Image x:Name="img"/>
+                </Canvas>
                 
-                <StackPanel x:Name="grandStack"  Margin="100" Background="white">
-                    <TextBlock Text="Your Class" FontSize="35"  Padding="10" />
-                    <TextBlock x:Name="text1"  FontSize="35"  Padding="10" />
-                    <TextBlock x:Name="text2"  FontSize="35"  Padding="10" />
-                    <TextBlock  x:Name="text3"  FontSize="35"  Padding="10" />
-                    <TextBlock  x:Name="text4"  FontSize="35"  Padding="10" />
-                    <Image x:Name="img"/>
-                </StackPanel>
-                
-            </Grid>
+            
         </ScrollViewer>
     </DockPanel>
 </Window>

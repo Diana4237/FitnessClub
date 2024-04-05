@@ -72,9 +72,8 @@ namespace FitnessClub
                 }
                 MenuItem Train = new MenuItem { Header = "Trainers", IsEnabled = false };
                 MenuItem time = new MenuItem { Header = "Timing" };
-                BitmapImage bitmapImage = GetImageFromDatabase(id_user);
+                BitmapImage bitmapImage = GetImageFromDatabaseCl(id_user);
                 Image img = new Image { Width = 40, Source = bitmapImage };
-                // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
                 account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
@@ -169,16 +168,43 @@ namespace FitnessClub
                             string s2= reader4.GetString(1);
                             string s3= reader4.GetString(2);
 
-                           fio = s1+s2+s3;
-                           // if ((byte[])reader4["Photo"] != null) { 
-                           //photo= (byte[])reader4["Photo"];
-                           // }
+                            // fio = s1+s2+s3;
+                            NameTren.Text= s1 +" "+ s2+ " " + s3;
+
+
                         }
                     }
                     reader4.Close();
                 }
 
+                string sqlExp6 = $"SELECT Photo FROM Staff WHERE Id_staff= '{Id_staff}' AND Photo IS NOT NUll";
+                using (SqlConnection connection4 = new SqlConnection(connectionString))
+                {
+                    connection4.Open();
+                    SqlCommand command6 = new SqlCommand(sqlExp5, connection4);
+                    SqlDataReader reader6 = command6.ExecuteReader();
 
+                    if (reader6.HasRows)
+                    {
+
+                        while (reader6.Read())
+                        {
+                           byte[]phot = (byte[])reader6["Photo"];
+                            BitmapImage bitmapImageTren = new BitmapImage();
+                            using (MemoryStream stream = new MemoryStream(phot))
+                            {
+                                bitmapImageTren.BeginInit();
+                                bitmapImageTren.CacheOption = BitmapCacheOption.OnLoad;
+                                bitmapImageTren.StreamSource = stream;
+                                bitmapImageTren.EndInit();
+                            }
+                            ImageBrush myImageBrush = new ImageBrush(bitmapImageTren);
+                            trener.Fill=myImageBrush;
+
+                        }
+                    }
+                    reader6.Close();
+                }
 
                 string sqlExp4 = $"SELECT Title,Cost FROM Type_subscription WHERE Id_type_subscription= '{id_type}'";
                 using (SqlConnection connection5 = new SqlConnection(connectionString))
@@ -201,16 +227,27 @@ namespace FitnessClub
                 }
                 if (title == "Step")
                 {
-                    //ImageBrush myBrush = new ImageBrush {ImageSource= 
-                    //    new BitmapImage(new Uri(@"\images\StepClass.JPG")) };
-                    //grandStack.Background = myBrush;
-
+                    ImageBrush myBrush = new ImageBrush
+                    {
+                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/StepClass.JPG"))
+                    };
+                    ImageBrush myBrush2 = new ImageBrush
+                    {
+                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/step2.JPG"))
+                    };
+                    ImageBrush myBrush3 = new ImageBrush
+                    {
+                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/step1.jpeg"))
+                    };
+                    poly1.Fill = myBrush;
+                    poly2.Fill = myBrush2;
+                    poly3.Fill = myBrush3;
                 }
-                text1.Text += title;
-                text2.Text+= date_time.ToString();
-                text3.Text+= cost.ToString();
-                text4.Text+= fio.ToString();
-
+                Class.Text += title;
+                string [] date=date_time.ToString().Split(' ');
+                Time.Text+= date[1].Substring(0, date[1].Length - 3);
+                Date.Text+= date[0];
+                CostClass.Text+= cost.ToString();
                 //BitmapImage bitmapImage = new BitmapImage();
                 //using (MemoryStream stream = new MemoryStream(photo))
                 //{
@@ -324,12 +361,43 @@ namespace FitnessClub
             TypesActivities types = new TypesActivities(Role, User);
             types.Show();
         }
-        public BitmapImage GetImageFromDatabase(int id)
+        public BitmapImage GetImageFromDatabaseStaff(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = $"SELECT Photo FROM Staff WHERE Id_staff = '{id}' AND Photo IS NOT NUll";
+                var query = $"SELECT Photo FROM Staff WHERE Id_staff = '{id}' AND Photo IS NOT NUll";
+                // string query = $"SELECT Photo FROM Doctors WHERE Id = '{id}' AND Photo IS NOT NUll";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            byte[] imageData = (byte[])reader["Photo"];
+                            BitmapImage bitmapImage = new BitmapImage();
+                            using (MemoryStream stream = new MemoryStream(imageData))
+                            {
+                                bitmapImage.BeginInit();
+                                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                                bitmapImage.StreamSource = stream;
+                                bitmapImage.EndInit();
+                            }
+                            return bitmapImage;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+        public BitmapImage GetImageFromDatabaseCl(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var query = $"SELECT Photo FROM Client WHERE Id_client = '{id}' AND Photo IS NOT NUll";
+                // string query = $"SELECT Photo FROM Doctors WHERE Id = '{id}' AND Photo IS NOT NUll";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
