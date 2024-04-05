@@ -14,16 +14,57 @@
         </Style>
 
     </Window.Resources>
-    <DockPanel Width="Auto">
+    <DockPanel Width="Auto" Name="dock">
         
         <StackPanel Name="Menustack" DockPanel.Dock="Top"></StackPanel>
         
-        <StackPanel Name="grand" DockPanel.Dock="Top" >
-            <Border BorderThickness="2" BorderBrush="Red" Width="100" Height="150" HorizontalAlignment="Left" Margin="20">
+        <Grid Name="grand" DockPanel.Dock="Top" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="400"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0">
+            <Border BorderThickness="2"  BorderBrush="Red" Width="310" Height="370" HorizontalAlignment="Left" Margin="20">
             <Image x:Name="imgAcc" />
             </Border>
-            <Button />
-            <TextBlock x:Name="fio"></TextBlock>
-        </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="1">
+                
+            <Button Width="50" HorizontalAlignment="Left" Grid.Column="0" Margin="150,0" Click="photoAdd">
+                <Button.Content>
+                    <Image Source="images/photoapparat.png"></Image>
+                </Button.Content>
+            </Button>
+            </StackPanel>
+            <Grid Grid.Column="1" Name="grid" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Full name: " Grid.Row="0" Margin="10"></TextBlock>
+                    <TextBlock x:Name="fio" Grid.Row="1" FontSize="15" Background="Red" Foreground="White" Padding="10" ></TextBlock>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Telephone: " Grid.Row="0" Margin="10"></TextBlock>
+                    <TextBlock x:Name="phon" Grid.Row="1" FontSize="15" Background="Red" Foreground="White" Padding="10"></TextBlock>
+                </Grid>
+            </Grid>
+        </Grid>
     </DockPanel>
 </Window>

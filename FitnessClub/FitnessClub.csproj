@@ -174,5 +174,8 @@
   <ItemGroup>
     <Resource Include="images\StepClass.JPG" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\photoapparat.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

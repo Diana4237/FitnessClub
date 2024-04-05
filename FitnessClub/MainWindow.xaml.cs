@@ -76,7 +76,7 @@ namespace FitnessClub
 
                 MenuItem inf = new MenuItem { Header = "Infirmation About Club", IsEnabled = false };
                 MenuItem act = new MenuItem { Header = "Types Of Sport Activities" };
-                act.Click += new RoutedEventHandler(TypeAct);
+                act.Click += new RoutedEventHandler(TypeActLogin);
                 string sqlExpression = "SELECT Title FROM Type_subscription";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -94,7 +94,7 @@ namespace FitnessClub
                     }
                 }
                 MenuItem Train = new MenuItem { Header = "Trainers" };
-                Train.Click += new RoutedEventHandler(TrainersClick);
+                Train.Click += new RoutedEventHandler(TrainersClickLogin);
                 MenuItem time = new MenuItem { Header = "Timing" };
                 time.Click += new RoutedEventHandler(TimeClick);
                 MenuItem sub = new MenuItem { Header = "Subscriptions" };
@@ -119,7 +119,7 @@ namespace FitnessClub
 
                 MenuItem inf = new MenuItem { Header = "Infirmation About Club", IsEnabled = false };
                 MenuItem act = new MenuItem { Header = "Types Of Sport Activities" };
-                act.Click += new RoutedEventHandler(TypeAct);
+                act.Click += new RoutedEventHandler(TypeActLogin);
                 string sqlExpression = "SELECT Title FROM Type_subscription";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -137,11 +137,13 @@ namespace FitnessClub
                     }
                 }
                 MenuItem Train = new MenuItem { Header = "Trainers" };
-                Train.Click += new RoutedEventHandler(TrainersClick);
+                Train.Click += new RoutedEventHandler(TrainersClickLogin);
                 MenuItem time = new MenuItem { Header = "Timing" };
-                Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
-
+                BitmapImage bitmapImage = GetImageFromDatabase(IdUser);
+                Image img = new Image { Width = 40, Source = bitmapImage };
+                // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
+                account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
                 menu.Items.Add(act);
                 menu.Items.Add(time);
@@ -157,7 +159,7 @@ namespace FitnessClub
 
                 MenuItem inf = new MenuItem { Header = "Infirmation About Club", IsEnabled = false };
                 MenuItem act = new MenuItem { Header = "Types Of Sport Activities" };
-                act.Click += new RoutedEventHandler(TypeAct);
+                act.Click += new RoutedEventHandler(TypeActLogin);
                 string sqlExpression = "SELECT Title FROM Type_subscription";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -175,11 +177,14 @@ namespace FitnessClub
                     }
                 }
                 MenuItem Train = new MenuItem { Header = "Trainers" };
-                Train.Click += new RoutedEventHandler(TrainersClick);
+                Train.Click += new RoutedEventHandler(TrainersClickLogin);
                 MenuItem time = new MenuItem { Header = "Timing" };
                 MenuItem clients = new MenuItem { Header = "Clients" };
-                Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
+                BitmapImage bitmapImage = GetImageFromDatabase(IdUser);
+                Image img = new Image { Width = 40, Source = bitmapImage };
+                // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
+                account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
                 menu.Items.Add(act);
                 menu.Items.Add(time);
@@ -205,7 +210,12 @@ namespace FitnessClub
             Trainers t = new Trainers();
             t.Show();
         }
-
+        public void TrainersClickLogin(object sender, RoutedEventArgs e)
+        {
+            //this.Close();
+            Trainers t = new Trainers(Role, User);
+            t.Show();
+        }
         public void TimeClick(object sender, RoutedEventArgs e)
         {
             //this.Close();
@@ -217,6 +227,11 @@ namespace FitnessClub
         public void TypeAct(object sender, RoutedEventArgs e)
         {
             TypesActivities types = new TypesActivities();
+            types.Show();
+        }
+        public void TypeActLogin(object sender, RoutedEventArgs e)
+        {
+            TypesActivities types = new TypesActivities(Role,User);
             types.Show();
         }
         public BitmapImage GetImageFromDatabase(int id)

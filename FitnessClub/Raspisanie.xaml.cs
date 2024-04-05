@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -21,7 +22,8 @@ namespace FitnessClub
     /// </summary>
     public partial class Raspisanie : Window
     {
-        
+        int Role;
+        int User;
         public int id_client;
         public int Id_hall;
         DateTime date_time;
@@ -38,7 +40,8 @@ namespace FitnessClub
         {
             InitializeComponent();
 
-            
+            Role = idRole;
+            User = id_user;
 
 
             if (idRole == 1)
@@ -48,6 +51,7 @@ namespace FitnessClub
                 Menu menu = new Menu { Background = new SolidColorBrush(Colors.Red), ItemsPanel = it };
 
                 MenuItem inf = new MenuItem { Header = "Infirmation About Club" };
+                inf.Click += new RoutedEventHandler(InformLogin);
                 MenuItem act = new MenuItem { Header = "Types Of Sport Activities" };
                 string sqlExpression = "SELECT Title FROM Type_subscription";
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -68,8 +72,11 @@ namespace FitnessClub
                 }
                 MenuItem Train = new MenuItem { Header = "Trainers", IsEnabled = false };
                 MenuItem time = new MenuItem { Header = "Timing" };
-                Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
+                BitmapImage bitmapImage = GetImageFromDatabase(id_user);
+                Image img = new Image { Width = 40, Source = bitmapImage };
+                // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
+                account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
                 menu.Items.Add(act);
                 menu.Items.Add(time);
@@ -194,9 +201,9 @@ namespace FitnessClub
                 }
                 if (title == "Step")
                 {
-                    ImageBrush myBrush = new ImageBrush {ImageSource= 
-                        new BitmapImage(new Uri(@"\images\StepClass.JPG")) };
-                    grandStack.Background = myBrush;
+                    //ImageBrush myBrush = new ImageBrush {ImageSource= 
+                    //    new BitmapImage(new Uri(@"\images\StepClass.JPG")) };
+                    //grandStack.Background = myBrush;
 
                 }
                 text1.Text += title;
@@ -233,6 +240,7 @@ namespace FitnessClub
                 Menu menu = new Menu { Background = new SolidColorBrush(Colors.Red), ItemsPanel = it };
 
                 MenuItem inf = new MenuItem { Header = "Infirmation About Club" };
+                inf.Click += new RoutedEventHandler(InformLogin);
                 MenuItem act = new MenuItem { Header = "Types Of Sport Activities" };
                 string sqlExpression = "SELECT Title FROM Type_subscription";
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -269,6 +277,7 @@ namespace FitnessClub
                 Menu menu = new Menu { Background = new SolidColorBrush(Colors.Red), ItemsPanel = it };
 
                 MenuItem inf = new MenuItem { Header = "Infirmation About Club" };
+                inf.Click += new RoutedEventHandler(InformLogin);
                 MenuItem act = new MenuItem { Header = "Types Of Sport Activities" };
                 string sqlExpression = "SELECT Title FROM Type_subscription";
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -299,6 +308,50 @@ namespace FitnessClub
                 menu.Items.Add(account);
                 Menustack.Children.Add(menu);
             }
+        }
+        public void InformLogin(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow(Role, User);
+            mainWindow.Show();
+        }
+        public void MyAccountClick(object sender, EventArgs e)
+        {
+            MyAccount autorization = new MyAccount(Role, User);
+            autorization.Show();
+        }
+        public void TypeActLogin(object sender, RoutedEventArgs e)
+        {
+            TypesActivities types = new TypesActivities(Role, User);
+            types.Show();
+        }
+        public BitmapImage GetImageFromDatabase(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = $"SELECT Photo FROM Staff WHERE Id_staff = '{id}' AND Photo IS NOT NUll";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            byte[] imageData = (byte[])reader["Photo"];
+                            BitmapImage bitmapImage = new BitmapImage();
+                            using (MemoryStream stream = new MemoryStream(imageData))
+                            {
+                                bitmapImage.BeginInit();
+                                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                                bitmapImage.StreamSource = stream;
+                                bitmapImage.EndInit();
+                            }
+                            return bitmapImage;
+                        }
+                    }
+                }
+            }
+            return null;
         }
     }
 }

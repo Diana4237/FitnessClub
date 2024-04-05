@@ -21,6 +21,8 @@ namespace FitnessClub
     /// </summary>
     public partial class Trainers : Window
     {
+        int Role;
+        int User;
         string connectionString = @"Data Source=-PC\MSSQLSERVER01; Initial Catalog=FitnessClub;Integrated Security=True;";
         public Trainers()
         {
@@ -144,9 +146,11 @@ namespace FitnessClub
             }
             
         }
-        public Trainers(int idRole)
+        public Trainers(int idRole,int IdUser)
         {
             InitializeComponent();
+            Role = idRole;
+            User = IdUser;
             if (idRole == 1)
             {
                 var factoryPanel = new FrameworkElementFactory(typeof(DockPanel));
@@ -154,7 +158,9 @@ namespace FitnessClub
                 Menu menu = new Menu { Background = new SolidColorBrush(Colors.Red), ItemsPanel = it };
 
                 MenuItem inf = new MenuItem { Header = "Infirmation About Club" };
+                inf.Click += new RoutedEventHandler(InformLogin);
                 MenuItem act = new MenuItem { Header = "Types Of Sport Activities" };
+                act.Click += new RoutedEventHandler(TypeActLogin);
                 string sqlExpression = "SELECT Title FROM Type_subscription";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -173,14 +179,106 @@ namespace FitnessClub
                 }
                 MenuItem Train = new MenuItem { Header = "Trainers", IsEnabled = false };
                 MenuItem time = new MenuItem { Header = "Timing" };
-                Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
+                time.Click += new RoutedEventHandler(TimeClick);
+                BitmapImage bitmapImage = GetImageFromDatabase(IdUser);
+                Image img = new Image { Width = 40, Source = bitmapImage };
+                // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
+                account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
                 menu.Items.Add(act);
                 menu.Items.Add(time);
                 menu.Items.Add(Train);
                 menu.Items.Add(account);
                 Menustack.Children.Add(menu);
+                string sqlExp = "SELECT Lastname,Firstname,Patronymic,Id_staff,Telephone,Achievements FROM Staff WHERE Id_role=2";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(sqlExp, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+
+                        while (reader.Read())
+                        {
+                            string Lastname = reader.GetString(0);
+                            string Firstname = reader.GetString(1);
+                            string Patronymic = reader.GetString(2);
+                            string tel = reader.GetString(4);
+                            int Id = reader.GetInt32(3);
+                            string achieve = reader.GetString(5);
+                            Grid gr = new Grid();
+                            var b = new Border
+                            {
+                                Margin = new Thickness(30),
+                                Background = Brushes.White,
+                                Padding = new Thickness(10),
+                                CornerRadius = new CornerRadius(10)
+                            };
+                            BitmapImage bitmapImage2 = GetImageFromDatabase(Id);
+                            var b1 = new Border
+                            {
+                                BorderThickness = new Thickness(2),
+                                BorderBrush = Brushes.Red,
+                                Width = 110,
+                                Height = 130,
+                            };
+                            var imag = new Image
+                            {
+                                Margin = new Thickness(10),
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                Width = 100,
+                                Height = 120,
+                                Source = bitmapImage2,
+
+                            };
+                            var TextB = new TextBlock
+                            {
+                                TextWrapping = TextWrapping.Wrap,
+                                Margin = new Thickness(10),
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                Text = Lastname + " " + Firstname + " " + Patronymic,
+                                FontWeight = FontWeights.Bold
+                            };
+                            var TextB2 = new TextBlock
+                            {
+                                TextWrapping = TextWrapping.Wrap,
+                                Text = "ContactData: " + tel,
+                                FontSize = 10,
+                            };
+                            var TextB3 = new TextBlock
+                            {
+                                TextWrapping = TextWrapping.Wrap,
+                                Text = achieve,
+                                FontSize = 10,
+                            };
+                            gr.RowDefinitions.Add(new RowDefinition());
+                            gr.RowDefinitions.Add(new RowDefinition());
+                            gr.RowDefinitions.Add(new RowDefinition());
+                            gr.RowDefinitions.Add(new RowDefinition());
+                            gr.ColumnDefinitions.Add(new ColumnDefinition());
+                            Grid.SetColumn(imag, 0);
+                            Grid.SetRow(imag, 0);
+                            Grid.SetColumn(TextB, 0);
+                            Grid.SetRow(TextB, 1);
+                            Grid.SetColumn(TextB2, 0);
+                            Grid.SetRow(TextB2, 2);
+                            Grid.SetColumn(TextB3, 0);
+                            Grid.SetRow(TextB3, 3);
+                            b1.Child = imag;
+                            gr.Children.Add(b1);
+                            gr.Children.Add(TextB);
+                            gr.Children.Add(TextB2);
+                            gr.Children.Add(TextB3);
+                            b.Child = gr;
+                            gridTrainers.Children.Add(b);
+                        }
+                    }
+                    reader.Close();
+                }
+
             }
             if (idRole == 2)
             {
@@ -189,7 +287,9 @@ namespace FitnessClub
                 Menu menu = new Menu { Background = new SolidColorBrush(Colors.Red), ItemsPanel = it };
 
                 MenuItem inf = new MenuItem { Header = "Infirmation About Club" };
+                inf.Click += new RoutedEventHandler(InformLogin);
                 MenuItem act = new MenuItem { Header = "Types Of Sport Activities" };
+                act.Click += new RoutedEventHandler(TypeActLogin);
                 string sqlExpression = "SELECT Title FROM Type_subscription";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -208,15 +308,106 @@ namespace FitnessClub
                 }
                 MenuItem Train = new MenuItem { Header = "Trainers", IsEnabled = false };
                 MenuItem time = new MenuItem { Header = "Timing" };
-                Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
-
+                time.Click += new RoutedEventHandler(TimeClick);
+                BitmapImage bitmapImage = GetImageFromDatabase(IdUser);
+                Image img = new Image { Width = 40, Source = bitmapImage };
+                // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
+                account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
                 menu.Items.Add(act);
                 menu.Items.Add(time);
                 menu.Items.Add(Train);
                 menu.Items.Add(account);
                 Menustack.Children.Add(menu);
+                string sqlExp = "SELECT Lastname,Firstname,Patronymic,Id_staff,Telephone,Achievements FROM Staff WHERE Id_role=2";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(sqlExp, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+
+                        while (reader.Read())
+                        {
+                            string Lastname = reader.GetString(0);
+                            string Firstname = reader.GetString(1);
+                            string Patronymic = reader.GetString(2);
+                            string tel = reader.GetString(4);
+                            int Id = reader.GetInt32(3);
+                            string achieve = reader.GetString(5);
+                            Grid gr = new Grid();
+                            var b = new Border
+                            {
+                                Margin = new Thickness(30),
+                                Background = Brushes.White,
+                                Padding = new Thickness(10),
+                                CornerRadius = new CornerRadius(10)
+                            };
+                            BitmapImage bitmapImage3 = GetImageFromDatabase(Id);
+                            var b1 = new Border
+                            {
+                                BorderThickness = new Thickness(2),
+                                BorderBrush = Brushes.Red,
+                                Width = 110,
+                                Height = 130,
+                            };
+                            var imag = new Image
+                            {
+                                Margin = new Thickness(10),
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                Width = 100,
+                                Height = 120,
+                                Source = bitmapImage3,
+
+                            };
+                            var TextB = new TextBlock
+                            {
+                                TextWrapping = TextWrapping.Wrap,
+                                Margin = new Thickness(10),
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                Text = Lastname + " " + Firstname + " " + Patronymic,
+                                FontWeight = FontWeights.Bold
+                            };
+                            var TextB2 = new TextBlock
+                            {
+                                TextWrapping = TextWrapping.Wrap,
+                                Text = "ContactData: " + tel,
+                                FontSize = 10,
+                            };
+                            var TextB3 = new TextBlock
+                            {
+                                TextWrapping = TextWrapping.Wrap,
+                                Text = achieve,
+                                FontSize = 10,
+                            };
+                            gr.RowDefinitions.Add(new RowDefinition());
+                            gr.RowDefinitions.Add(new RowDefinition());
+                            gr.RowDefinitions.Add(new RowDefinition());
+                            gr.RowDefinitions.Add(new RowDefinition());
+                            gr.ColumnDefinitions.Add(new ColumnDefinition());
+                            Grid.SetColumn(imag, 0);
+                            Grid.SetRow(imag, 0);
+                            Grid.SetColumn(TextB, 0);
+                            Grid.SetRow(TextB, 1);
+                            Grid.SetColumn(TextB2, 0);
+                            Grid.SetRow(TextB2, 2);
+                            Grid.SetColumn(TextB3, 0);
+                            Grid.SetRow(TextB3, 3);
+                            b1.Child = imag;
+                            gr.Children.Add(b1);
+                            gr.Children.Add(TextB);
+                            gr.Children.Add(TextB2);
+                            gr.Children.Add(TextB3);
+                            b.Child = gr;
+                            gridTrainers.Children.Add(b);
+                        }
+                    }
+                    reader.Close();
+                }
+
             }
             if (idRole == 3)
             {
@@ -225,7 +416,9 @@ namespace FitnessClub
                 Menu menu = new Menu { Background = new SolidColorBrush(Colors.Red), ItemsPanel = it };
 
                 MenuItem inf = new MenuItem { Header = "Infirmation About Club" };
+                inf.Click += new RoutedEventHandler(InformLogin);
                 MenuItem act = new MenuItem { Header = "Types Of Sport Activities" };
+                act.Click += new RoutedEventHandler(TypeActLogin);
                 string sqlExpression = "SELECT Title FROM Type_subscription";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -244,9 +437,13 @@ namespace FitnessClub
                 }
                 MenuItem Train = new MenuItem { Header = "Trainers", IsEnabled = false };
                 MenuItem time = new MenuItem { Header = "Timing" };
+                time.Click += new RoutedEventHandler(TimeClick);
                 MenuItem clients = new MenuItem { Header = "Clients" };
-                Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
+                BitmapImage bitmapImag = GetImageFromDatabase(IdUser);
+                Image img = new Image { Width = 40, Source = bitmapImag };
+                // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
+                account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
                 menu.Items.Add(act);
                 menu.Items.Add(time);
@@ -343,6 +540,22 @@ namespace FitnessClub
                 }
             }
         }
+        public void TimeClick(object sender, RoutedEventArgs e)
+        {
+            //this.Close();
+            Raspisanie t = new Raspisanie(Role, User);
+            t.Show();
+        }
+        public void MyAccountClick(object sender, EventArgs e)
+        {
+            MyAccount autorization = new MyAccount(Role, User);
+            autorization.Show();
+        }
+        public void TypeActLogin(object sender, RoutedEventArgs e)
+        {
+            TypesActivities types = new TypesActivities(Role, User);
+            types.Show();
+        }
         public BitmapImage GetImageFromDatabase(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -380,6 +593,11 @@ namespace FitnessClub
         public void Inform(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+        }
+        public void InformLogin(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow(Role,User);
             mainWindow.Show();
         }
         public void TypeAct(object sender, RoutedEventArgs e)

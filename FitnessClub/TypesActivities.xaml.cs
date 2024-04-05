@@ -58,7 +58,7 @@ namespace FitnessClub
             menu.Items.Add(account);
             Menustack.Children.Add(menu);
         }
-        public TypesActivities(int idRole)
+        public TypesActivities(int idRole,int idUser)
         {
             InitializeComponent();
             if (idRole == 1)

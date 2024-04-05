@@ -63,7 +63,7 @@ namespace FitnessClub
                 time.Click += new RoutedEventHandler(TimeClick);
                 System.Windows.Controls.MenuItem sub = new System.Windows.Controls.MenuItem { Header = "Subscriptions" };
 
-                BitmapImage bitmapImage = GetImageFromDatabase(IdUser);
+                BitmapImage bitmapImage = GetImageFromDatabaseCl(IdUser);
                 Image img = new Image { Width = 40, Source = bitmapImage };
                 // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
                 System.Windows.Controls.MenuItem account = new System.Windows.Controls.MenuItem { Header = img };
@@ -76,7 +76,7 @@ namespace FitnessClub
                 Menustack.Children.Add(menu);
 
 
-                string sqlMydata = $"SELECT FirstName, LastName, Patronymic FROM Client WHERE Id_client='{IdUser}'";
+                string sqlMydata = $"SELECT FirstName, LastName, Patronymic, Telephone FROM Client WHERE Id_client='{IdUser}'";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
@@ -87,11 +87,13 @@ namespace FitnessClub
                         while (reader.Read())
                         {
                             string title = reader.GetString(0)+reader.GetString(1) + reader.GetString(2) ;
-                            fio.Text = title;
+                            fio.Text += title;
+                            string phone= reader.GetString(3);
+                            phon.Text += phone;
                         }
                     }
                 }
-                imgAcc.Source = GetImageFromDatabase(IdUser);
+                imgAcc.Source = GetImageFromDatabaseCl(IdUser);
             }
             if (idRole == 2)
             {
@@ -121,15 +123,35 @@ namespace FitnessClub
                 System.Windows.Controls.MenuItem Train = new System.Windows.Controls.MenuItem { Header = "Trainers" };
                 Train.Click += new RoutedEventHandler(TrainersClick);
                 System.Windows.Controls.MenuItem time = new System.Windows.Controls.MenuItem { Header = "Timing" };
-                Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
-                //, HorizontalAlignment = HorizontalAlignment.Right
+                BitmapImage bitmapImage = GetImageFromDatabaseStaff(IdUser);
+                Image img = new Image { Width = 40, Source = bitmapImage };
+                // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
                 System.Windows.Controls.MenuItem account = new System.Windows.Controls.MenuItem { Header = img };
+                account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
                 menu.Items.Add(act);
                 menu.Items.Add(time);
                 menu.Items.Add(Train);
                 menu.Items.Add(account);
                 Menustack.Children.Add(menu);
+                string sqlMydata = $"SELECT FirstName, LastName, Patronymic, Telephone FROM Staff WHERE Id_staff='{IdUser}'";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(sqlMydata, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            string title = reader.GetString(0) + reader.GetString(1) + reader.GetString(2);
+                            fio.Text += title;
+                            string phone = reader.GetString(3);
+                            phon.Text += phone;
+                        }
+                    }
+                }
+                imgAcc.Source = GetImageFromDatabaseStaff(IdUser);
             }
             if (idRole == 3)
             {
@@ -160,8 +182,10 @@ namespace FitnessClub
                 Train.Click += new RoutedEventHandler(TrainersClick);
                 System.Windows.Controls.MenuItem time = new System.Windows.Controls.MenuItem { Header = "Timing" };
                 System.Windows.Controls.MenuItem clients = new System.Windows.Controls.MenuItem { Header = "Clients" };
-                Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
+                BitmapImage bitmapImage = GetImageFromDatabaseStaff(IdUser);
+                Image img = new Image { Width = 40, Source = bitmapImage };
                 System.Windows.Controls.MenuItem account = new System.Windows.Controls.MenuItem { Header = img };
+                account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
                 menu.Items.Add(act);
                 menu.Items.Add(time);
@@ -169,6 +193,24 @@ namespace FitnessClub
                 menu.Items.Add(clients);
                 menu.Items.Add(account);
                 Menustack.Children.Add(menu);
+                string sqlMydata = $"SELECT FirstName, LastName, Patronymic, Telephone FROM Staff WHERE Id_staff='{IdUser}'";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(sqlMydata, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            string title = reader.GetString(0) + reader.GetString(1) + reader.GetString(2);
+                            fio.Text += title;
+                            string phone = reader.GetString(3);
+                            phon.Text += phone;
+                        }
+                    }
+                }
+                imgAcc.Source = GetImageFromDatabaseStaff(IdUser);
             }
         }
         public void MyAccountClick(object sender, EventArgs e)
@@ -179,7 +221,7 @@ namespace FitnessClub
         public void TrainersClick(object sender, RoutedEventArgs e)
         {
             //this.Close();
-            Trainers t = new Trainers();
+            Trainers t = new Trainers(Role,User);
             t.Show();
         }
 
@@ -193,11 +235,40 @@ namespace FitnessClub
 
         public void TypeAct(object sender, RoutedEventArgs e)
         {
-            TypesActivities types = new TypesActivities();
+            TypesActivities types = new TypesActivities(Role, User);
             types.Show();
         }
-
-        public BitmapImage GetImageFromDatabase(int id)
+        public BitmapImage GetImageFromDatabaseStaff(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var query = $"SELECT Photo FROM Staff WHERE Id_staff = '{id}' AND Photo IS NOT NUll";
+                // string query = $"SELECT Photo FROM Doctors WHERE Id = '{id}' AND Photo IS NOT NUll";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            byte[] imageData = (byte[])reader["Photo"];
+                            BitmapImage bitmapImage = new BitmapImage();
+                            using (MemoryStream stream = new MemoryStream(imageData))
+                            {
+                                bitmapImage.BeginInit();
+                                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                                bitmapImage.StreamSource = stream;
+                                bitmapImage.EndInit();
+                            }
+                            return bitmapImage;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+        public BitmapImage GetImageFromDatabaseCl(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -229,8 +300,54 @@ namespace FitnessClub
         }
         public void Inform(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(Role, User);
             mainWindow.Show();
+        }
+        public void photoAdd(object sender, RoutedEventArgs e)
+        {
+            int c = 0;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.ShowDialog();
+            try
+            {
+                byte[] image_bytes = File.ReadAllBytes(openFileDialog.FileName);
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = connection;
+                    if (Role > 1)
+                    {
+                        command.CommandText = $"UPDATE Staff SET Photo=@ImageData WHERE Id_staff='{User}'";
+                    }
+                    else
+                    {
+                        command.CommandText = $"UPDATE Client SET Photo=@ImageData WHERE Id_client='{User}'";
+
+                    }
+                    command.Parameters.Add("@ImageData", SqlDbType.Image, 1000000);
+                    command.Parameters["@ImageData"].Value = image_bytes;
+                    command.ExecuteNonQuery();
+                    c++;
+                }
+                if (c > 0)
+                {
+                    if (Role > 1)
+                    {
+                        BitmapImage bitmapImage = GetImageFromDatabaseStaff(User);
+                        imgAcc.Source = bitmapImage;
+                    }
+                    else
+                    {
+                        BitmapImage bitmapImage = GetImageFromDatabaseCl(User);
+                        imgAcc.Source = bitmapImage;
+                    }
+                }
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show("The photo was not uploaded");
+            }
         }
     }
 }
