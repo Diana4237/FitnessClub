@@ -50,9 +50,9 @@
                 </TextBlock>
                 <Line X1="210"  Stroke="Red" StrokeThickness="3" Canvas.Top="30" Canvas.Left="412"/>
                 <TextBlock x:Name="Class"  FontSize="23" Foreground="Red" Padding="10" Canvas.Left="500" Canvas.Top="30" FontWeight="Bold"/>
-                <TextBlock x:Name="Time"  FontSize="23"  Padding="10" Canvas.Left="500"  Canvas.Top="100" FontWeight="Bold"/>
-                <TextBlock  x:Name="Date"  FontSize="20"  Padding="10" Canvas.Left="480"  Canvas.Top="140" />
-                <TextBlock  x:Name="CostClass"  FontSize="17" Foreground="Red"  Padding="10" Canvas.Left="490" Text="Cost:" Canvas.Top="180" />
+                <TextBlock x:Name="Time"  FontSize="23"  Padding="10" Canvas.Left="500"  Canvas.Top="100" FontWeight="Bold" FontFamily="Juice ITC"/>
+                <TextBlock  x:Name="Date"  FontSize="20"  Padding="10" Canvas.Left="480"  Canvas.Top="140" FontWeight="Bold" FontFamily="Juice ITC"/>
+                <TextBlock  x:Name="CostClass"  FontSize="17" Foreground="Red"  Padding="10" Canvas.Left="490" Text="Cost:" Canvas.Top="180" FontFamily="Juice ITC"/>
                 <Image x:Name="img"/>
                 </Canvas>
                 

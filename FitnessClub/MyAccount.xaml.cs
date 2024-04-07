@@ -65,8 +65,8 @@ namespace FitnessClub
 
                 BitmapImage bitmapImage = GetImageFromDatabaseCl(IdUser);
                 Image img = new Image { Width = 40, Source = bitmapImage };
-                // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
-                System.Windows.Controls.MenuItem account = new System.Windows.Controls.MenuItem { Header = img };
+               
+                System.Windows.Controls.MenuItem account = new System.Windows.Controls.MenuItem { Header = img,HorizontalAlignment=System.Windows.HorizontalAlignment.Right };
                 account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
                 menu.Items.Add(act);
@@ -76,7 +76,7 @@ namespace FitnessClub
                 Menustack.Children.Add(menu);
 
 
-                string sqlMydata = $"SELECT FirstName, LastName, Patronymic, Telephone FROM Client WHERE Id_client='{IdUser}'";
+                string sqlMydata = $"SELECT FirstName, LastName, Telephone FROM Client WHERE Id_client='{IdUser}'";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
@@ -86,14 +86,14 @@ namespace FitnessClub
                     {
                         while (reader.Read())
                         {
-                            string title = reader.GetString(0)+reader.GetString(1) + reader.GetString(2) ;
+                            string title = reader.GetString(1)+" "+reader.GetString(0) ;
                             fio.Text += title;
-                            string phone= reader.GetString(3);
+                            string phone= reader.GetString(2);
                             phon.Text += phone;
                         }
                     }
                 }
-                imgAcc.Source = GetImageFromDatabaseCl(IdUser);
+                imgAcc.ImageSource = GetImageFromDatabaseCl(IdUser);
             }
             if (idRole == 2)
             {
@@ -144,14 +144,14 @@ namespace FitnessClub
                     {
                         while (reader.Read())
                         {
-                            string title = reader.GetString(0) + reader.GetString(1) + reader.GetString(2);
+                            string title = reader.GetString(1) + " " + reader.GetString(0);
                             fio.Text += title;
-                            string phone = reader.GetString(3);
+                            string phone = reader.GetString(2);
                             phon.Text += phone;
                         }
                     }
                 }
-                imgAcc.Source = GetImageFromDatabaseStaff(IdUser);
+                imgAcc.ImageSource = GetImageFromDatabaseStaff(IdUser);
             }
             if (idRole == 3)
             {
@@ -203,14 +203,14 @@ namespace FitnessClub
                     {
                         while (reader.Read())
                         {
-                            string title = reader.GetString(0) + reader.GetString(1) + reader.GetString(2);
+                            string title = reader.GetString(1) + " " + reader.GetString(0);
                             fio.Text += title;
-                            string phone = reader.GetString(3);
+                            string phone = reader.GetString(2);
                             phon.Text += phone;
                         }
                     }
                 }
-                imgAcc.Source = GetImageFromDatabaseStaff(IdUser);
+                imgAcc.ImageSource = GetImageFromDatabaseStaff(IdUser);
             }
         }
         public void MyAccountClick(object sender, EventArgs e)
@@ -335,12 +335,12 @@ namespace FitnessClub
                     if (Role > 1)
                     {
                         BitmapImage bitmapImage = GetImageFromDatabaseStaff(User);
-                        imgAcc.Source = bitmapImage;
+                        imgAcc.ImageSource = bitmapImage;
                     }
                     else
                     {
                         BitmapImage bitmapImage = GetImageFromDatabaseCl(User);
-                        imgAcc.Source = bitmapImage;
+                        imgAcc.ImageSource = bitmapImage;
                     }
                 }
             }

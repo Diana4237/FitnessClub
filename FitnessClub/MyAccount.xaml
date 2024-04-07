@@ -19,8 +19,48 @@
     <DockPanel Width="Auto" Name="dock">
         
         <StackPanel Name="Menustack" DockPanel.Dock="Top"></StackPanel>
-        
-        <Grid Name="grand" DockPanel.Dock="Top" >
+
+        <Canvas>
+            <Canvas.Background>
+                <ImageBrush ImageSource="/images/BackAcc.jpg" />
+            </Canvas.Background>
+
+            <StackPanel Canvas.Top="250" Canvas.Left="20" >
+                <TextBlock x:Name="fio" FontSize="55" FontFamily="Juice ITC" FontWeight="Bold" >
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" BlurRadius="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Border BorderBrush="Black" BorderThickness="1">
+                    <TextBlock Text="Telephone: " FontFamily="Bahnschrift Light Condensed" x:Name="phon" FontSize="18" Margin="10"/>
+                    <!--Castellar-->
+                </Border>
+            </StackPanel>
+            <Line X1="220" Y1="-180" Canvas.Top="200" Canvas.Left="300" Stroke="Black" StrokeThickness="2">
+                <Line.Effect>
+                    <DropShadowEffect Opacity="0.7" BlurRadius="7" Direction="-40" />
+                </Line.Effect>
+            </Line>
+            <Line X1="220" Y1="-180" Canvas.Top="500" Canvas.Left="496" Stroke="Black" StrokeThickness="2">
+                <Line.Effect>
+                    <DropShadowEffect Opacity="0.7" BlurRadius="7" Direction="-40" />
+                </Line.Effect>
+            </Line>
+            <Polygon Points="50,0 300,0 300,370 140,500 -90,500 -90,115" 
+                 Canvas.Left="430" 
+                 Canvas.Top="60" 
+             Stroke="Black" 
+             StrokeThickness="2" 
+             >
+                <Polygon.RenderTransform>
+                    <ScaleTransform ScaleX="0.8" ScaleY="0.8"></ScaleTransform>
+                </Polygon.RenderTransform>
+                <Polygon.Fill>
+                    <ImageBrush x:Name="imgAcc"/>
+                </Polygon.Fill>
+            </Polygon>
+        </Canvas>
+        <!--<Grid Name="grand" DockPanel.Dock="Top" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="350"/>
                 <ColumnDefinition/>
@@ -67,6 +107,6 @@
                     <TextBlock x:Name="phon" Grid.Row="1" FontSize="15" Background="Red" Foreground="White" Padding="10"></TextBlock>
                 </Grid>
             </Grid>
-        </Grid>
+        </Grid>-->
     </DockPanel>
 </Window>
