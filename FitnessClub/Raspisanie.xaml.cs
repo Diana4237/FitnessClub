@@ -348,16 +348,19 @@ namespace FitnessClub
         }
         public void InformLogin(object sender, RoutedEventArgs e)
         {
+            this.Close();
             MainWindow mainWindow = new MainWindow(Role, User);
             mainWindow.Show();
         }
         public void MyAccountClick(object sender, EventArgs e)
         {
+            this.Close();
             MyAccount autorization = new MyAccount(Role, User);
             autorization.Show();
         }
         public void TypeActLogin(object sender, RoutedEventArgs e)
         {
+            this.Close();
             TypesActivities types = new TypesActivities(Role, User);
             types.Show();
         }

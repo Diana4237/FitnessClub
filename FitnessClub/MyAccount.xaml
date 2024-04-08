@@ -59,6 +59,11 @@
                     <ImageBrush x:Name="imgAcc"/>
                 </Polygon.Fill>
             </Polygon>
+            <Button Width="50" HorizontalAlignment="Left" Canvas.Top="410" Canvas.Left="210" Margin="150,0" Click="photoAdd">
+                <Button.Content>
+                    <Image Source="images/photoapparat.png"></Image>
+                </Button.Content>
+            </Button>
         </Canvas>
         <!--<Grid Name="grand" DockPanel.Dock="Top" >
             <Grid.ColumnDefinitions>

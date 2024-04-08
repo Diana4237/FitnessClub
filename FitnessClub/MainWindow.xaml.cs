@@ -196,29 +196,31 @@ namespace FitnessClub
         }
         public void AccountClick(object sender, EventArgs e)
         {
+            this.Close();
             Autorization autorization = new Autorization();
             autorization.Show();
         }
         public void MyAccountClick(object sender, EventArgs e)
         {
+            this.Close();
             MyAccount autorization = new MyAccount(Role,User);
             autorization.Show();
         }
         public void TrainersClick(object sender, RoutedEventArgs e)
         {
-            //this.Close();
+            this.Close();
             Trainers t = new Trainers();
             t.Show();
         }
         public void TrainersClickLogin(object sender, RoutedEventArgs e)
         {
-            //this.Close();
+            this.Close();
             Trainers t = new Trainers(Role, User);
             t.Show();
         }
         public void TimeClick(object sender, RoutedEventArgs e)
         {
-            //this.Close();
+            this.Close();
             Raspisanie t = new Raspisanie(Role,User);
             t.Show();
         }
@@ -226,11 +228,13 @@ namespace FitnessClub
 
         public void TypeAct(object sender, RoutedEventArgs e)
         {
+            this.Close();
             TypesActivities types = new TypesActivities();
             types.Show();
         }
         public void TypeActLogin(object sender, RoutedEventArgs e)
         {
+            this.Close();
             TypesActivities types = new TypesActivities(Role,User);
             types.Show();
         }

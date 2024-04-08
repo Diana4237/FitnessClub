@@ -86,7 +86,7 @@ namespace FitnessClub
                             Padding = new Thickness(10),
                             CornerRadius=new CornerRadius(10)
                         };
-                        BitmapImage bitmapImage = GetImageFromDatabase(Id);
+                        BitmapImage bitmapImage = GetImageFromDatabaseStaff(Id);
                         var b1 = new Border { BorderThickness = new Thickness(2),BorderBrush=Brushes.Red,
                             Width = 110,
                             Height = 130,
@@ -180,7 +180,7 @@ namespace FitnessClub
                 MenuItem Train = new MenuItem { Header = "Trainers", IsEnabled = false };
                 MenuItem time = new MenuItem { Header = "Timing" };
                 time.Click += new RoutedEventHandler(TimeClick);
-                BitmapImage bitmapImage = GetImageFromDatabase(IdUser);
+                BitmapImage bitmapImage = GetImageFromDatabaseCl(IdUser);
                 Image img = new Image { Width = 40, Source = bitmapImage };
                 // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
@@ -217,7 +217,7 @@ namespace FitnessClub
                                 Padding = new Thickness(10),
                                 CornerRadius = new CornerRadius(10)
                             };
-                            BitmapImage bitmapImage2 = GetImageFromDatabase(Id);
+                            BitmapImage bitmapImage2 = GetImageFromDatabaseStaff(Id);
                             var b1 = new Border
                             {
                                 BorderThickness = new Thickness(2),
@@ -309,7 +309,7 @@ namespace FitnessClub
                 MenuItem Train = new MenuItem { Header = "Trainers", IsEnabled = false };
                 MenuItem time = new MenuItem { Header = "Timing" };
                 time.Click += new RoutedEventHandler(TimeClick);
-                BitmapImage bitmapImage = GetImageFromDatabase(IdUser);
+                BitmapImage bitmapImage = GetImageFromDatabaseStaff(IdUser);
                 Image img = new Image { Width = 40, Source = bitmapImage };
                 // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
@@ -346,7 +346,7 @@ namespace FitnessClub
                                 Padding = new Thickness(10),
                                 CornerRadius = new CornerRadius(10)
                             };
-                            BitmapImage bitmapImage3 = GetImageFromDatabase(Id);
+                            BitmapImage bitmapImage3 = GetImageFromDatabaseStaff(Id);
                             var b1 = new Border
                             {
                                 BorderThickness = new Thickness(2),
@@ -439,7 +439,7 @@ namespace FitnessClub
                 MenuItem time = new MenuItem { Header = "Timing" };
                 time.Click += new RoutedEventHandler(TimeClick);
                 MenuItem clients = new MenuItem { Header = "Clients" };
-                BitmapImage bitmapImag = GetImageFromDatabase(IdUser);
+                BitmapImage bitmapImag = GetImageFromDatabaseStaff(IdUser);
                 Image img = new Image { Width = 40, Source = bitmapImag };
                 // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
@@ -477,7 +477,7 @@ namespace FitnessClub
                                 Padding = new Thickness(10),
                                 CornerRadius = new CornerRadius(10)
                             };
-                            BitmapImage bitmapImage = GetImageFromDatabase(Id);
+                            BitmapImage bitmapImage = GetImageFromDatabaseStaff(Id);
                             var b1 = new Border
                             {
                                 BorderThickness = new Thickness(2),
@@ -542,26 +542,59 @@ namespace FitnessClub
         }
         public void TimeClick(object sender, RoutedEventArgs e)
         {
-            //this.Close();
+            this.Close();
             Raspisanie t = new Raspisanie(Role, User);
             t.Show();
         }
         public void MyAccountClick(object sender, EventArgs e)
         {
+            this.Close();
             MyAccount autorization = new MyAccount(Role, User);
             autorization.Show();
         }
         public void TypeActLogin(object sender, RoutedEventArgs e)
         {
+            this.Close();
             TypesActivities types = new TypesActivities(Role, User);
             types.Show();
         }
-        public BitmapImage GetImageFromDatabase(int id)
+        public BitmapImage GetImageFromDatabaseStaff(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = $"SELECT Photo FROM Staff WHERE Id_staff = '{id}' AND Photo IS NOT NUll";
+                var query = $"SELECT Photo FROM Staff WHERE Id_staff = '{id}' AND Photo IS NOT NUll";
+                // string query = $"SELECT Photo FROM Doctors WHERE Id = '{id}' AND Photo IS NOT NUll";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            byte[] imageData = (byte[])reader["Photo"];
+                            BitmapImage bitmapImage = new BitmapImage();
+                            using (MemoryStream stream = new MemoryStream(imageData))
+                            {
+                                bitmapImage.BeginInit();
+                                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                                bitmapImage.StreamSource = stream;
+                                bitmapImage.EndInit();
+                            }
+                            return bitmapImage;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+        public BitmapImage GetImageFromDatabaseCl(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var query = $"SELECT Photo FROM Client WHERE Id_client = '{id}' AND Photo IS NOT NUll";
+                // string query = $"SELECT Photo FROM Doctors WHERE Id = '{id}' AND Photo IS NOT NUll";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
@@ -587,21 +620,25 @@ namespace FitnessClub
         }
         public void AccountClick(object sender, EventArgs e)
         {
+            this.Close();
             Autorization autorization = new Autorization();
             autorization.Show();
         }
         public void Inform(object sender, RoutedEventArgs e)
         {
+            this.Close();
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
         }
         public void InformLogin(object sender, RoutedEventArgs e)
         {
+            this.Close();
             MainWindow mainWindow = new MainWindow(Role,User);
             mainWindow.Show();
         }
         public void TypeAct(object sender, RoutedEventArgs e)
         {
+            this.Close();
             TypesActivities types = new TypesActivities();
             types.Show();
         }
