@@ -1,0 +1,25 @@
+﻿<Window x:Class="FitnessClub.DeleteRaspisani"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FitnessClub"
+        mc:Ignorable="d"
+        Title="DeleteRaspisani" Height="450" Width="800">
+    <DockPanel Background="red" Name="dock">
+
+        <StackPanel Margin="20"  Name="stack" Orientation="Vertical" VerticalAlignment="Center">
+
+            <ListBox Name="list" />
+            <Button Content="Delete" Click="EditButton"/>
+            <!--<Calendar  Name="calend"/>
+            <Label Content="Hour"/>
+            <TextBox />
+            <Label Content="Minute"/>
+
+            <TextBox />
+            <Button Click="EditButton" Content="Изменить" Margin="30"/>-->
+
+        </StackPanel>
+    </DockPanel>
+</Window>

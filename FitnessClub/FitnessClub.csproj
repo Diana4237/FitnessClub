@@ -62,8 +62,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddClient.xaml.cs">
+      <DependentUpon>AddClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddRaspisanie.xaml.cs">
+      <DependentUpon>AddRaspisanie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddTrainer.xaml.cs">
+      <DependentUpon>AddTrainer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Autorization.xaml.cs">
       <DependentUpon>Autorization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Client.xaml.cs">
+      <DependentUpon>Client.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteRaspisani.xaml.cs">
+      <DependentUpon>DeleteRaspisani.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditRaspisanie.xaml.cs">
+      <DependentUpon>EditRaspisanie.xaml</DependentUpon>
     </Compile>
     <Compile Include="Information.xaml.cs">
       <DependentUpon>Information.xaml</DependentUpon>
@@ -74,13 +92,40 @@
     <Compile Include="Raspisanie.xaml.cs">
       <DependentUpon>Raspisanie.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Subscription.xaml.cs">
+      <DependentUpon>Subscription.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Trainers.xaml.cs">
       <DependentUpon>Trainers.xaml</DependentUpon>
     </Compile>
     <Compile Include="TypesActivities.xaml.cs">
       <DependentUpon>TypesActivities.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddRaspisanie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddTrainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Autorization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Client.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeleteRaspisani.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditRaspisanie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -106,6 +151,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Raspisanie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Subscription.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

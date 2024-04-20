@@ -451,6 +451,7 @@ namespace FitnessClub
                 menu.Items.Add(clients);
                 menu.Items.Add(account);
                 Menustack.Children.Add(menu);
+                butAddT.Visibility = Visibility.Visible;
                 string sqlExp = "SELECT Lastname,Firstname,Patronymic,Id_staff,Telephone,Achievements FROM Staff WHERE Id_role=2";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -618,7 +619,12 @@ namespace FitnessClub
             }
             return null;
         }
-        public void AccountClick(object sender, EventArgs e)
+        public void AddTren(object sender, EventArgs e)
+        {
+            AddTrainer addTrainer = new AddTrainer();
+            addTrainer.Show();
+        }
+            public void AccountClick(object sender, EventArgs e)
         {
             this.Close();
             Autorization autorization = new Autorization();

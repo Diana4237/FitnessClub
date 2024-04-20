@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -14,6 +15,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
+using Image = System.Windows.Controls.Image;
 
 namespace FitnessClub
 {
@@ -35,6 +38,10 @@ namespace FitnessClub
         public string fio;
         public byte[] photo;
         int id_class = 0;
+        TextBox TextB;
+        DateTime Dat;
+
+        string type_sub;
         string connectionString = @"Data Source=-PC\MSSQLSERVER01; Initial Catalog=FitnessClub;Integrated Security=True;";
         public Raspisanie(int idRole, int id_user)
         {
@@ -42,7 +49,7 @@ namespace FitnessClub
 
             Role = idRole;
             User = id_user;
-
+            
 
             if (idRole == 1)
             {
@@ -295,6 +302,7 @@ namespace FitnessClub
                         }
                     }
                 }
+                
                 MenuItem Train = new MenuItem { Header = "Trainers", IsEnabled = false };
                 MenuItem time = new MenuItem { Header = "Timing" };
                 Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
@@ -306,6 +314,126 @@ namespace FitnessClub
                 menu.Items.Add(Train);
                 menu.Items.Add(account);
                 Menustack.Children.Add(menu);
+
+
+
+              //  grandStack.Visibility = Visibility.Collapsed;
+              poly1.Visibility = Visibility.Collapsed;
+                poly2.Visibility = Visibility.Collapsed;
+                poly3.Visibility = Visibility.Collapsed;
+                trener.Visibility = Visibility.Collapsed;
+                CostClass.Visibility = Visibility.Collapsed;    
+                scroll.Visibility = Visibility.Collapsed;
+                button1.Visibility = Visibility.Visible;
+                button2.Visibility = Visibility.Visible;
+                button1.Click += new RoutedEventHandler(EditButton);
+                button2.Click += new RoutedEventHandler(EditButton2);
+                //Trainer.Children.Add(button1);
+                //Trainer.Children.Add(button2);
+
+
+
+                string sqlExp = $"SELECT Subscription FROM Staff WHERE Id_staff='{id_user}'";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(sqlExp, connection);
+                    SqlDataReader reader1 = command.ExecuteReader();
+
+                    if (reader1.HasRows)
+                    {
+
+                        while (reader1.Read())
+                        {
+                            type_sub = reader1.GetString(0);
+
+
+                        }
+                    }
+                    reader1.Close();
+
+
+                }
+
+
+
+                string sqlExp1 = $"SELECT Date_Time FROM Class WHERE Id_staff='{id_user}'";
+                using (SqlConnection connection1 = new SqlConnection(connectionString))
+                {
+                    connection1.Open();
+                    SqlCommand command1 = new SqlCommand(sqlExp1, connection1);
+                    SqlDataReader reader2 = command1.ExecuteReader();
+
+                    if (reader2.HasRows)
+                    {
+
+                        while (reader2.Read())
+                        {
+                             Dat = reader2.GetDateTime(0);
+                           
+                           
+
+                Grid gr = new Grid();
+                var b = new System.Windows.Controls.Border
+                {
+                    Margin = new Thickness(30),
+                    Background = Brushes.Red,
+                    Padding = new Thickness(10),
+
+                };
+                            var TextA = new TextBlock
+                            {
+                                TextWrapping = TextWrapping.Wrap,
+                                Margin = new Thickness(10),
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                Text = type_sub,
+                                FontWeight = FontWeights.Bold,
+                                Foreground = Brushes.White,
+                            };
+                            TextB = new TextBox
+                            {
+                                TextWrapping = TextWrapping.Wrap,
+                                Margin = new Thickness(10),
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                Text = Dat.ToString(),
+                                
+                                FontWeight = FontWeights.Bold,
+                                IsEnabled = false
+                            };
+
+
+
+                            
+                            gr.RowDefinitions.Add(new RowDefinition());
+                            gr.RowDefinitions.Add(new RowDefinition());
+                          
+                            Grid.SetColumn(TextA, 0);
+                            Grid.SetRow(TextA, 0);
+                            Grid.SetColumn(TextB, 1);
+                            Grid.SetRow(TextB, 1);
+                          
+                            gr.Children.Add(TextA);
+                            gr.Children.Add(TextB);
+                            
+                            b.Child = gr;
+                            
+                            gridTrainers.Children.Add(b);
+                            
+                        }
+                    }
+                    reader2.Close();
+                }
+
+
+
+
+
+
+
+
+
+
+
             }
             if (idRole == 3)
             {
@@ -334,19 +462,222 @@ namespace FitnessClub
                 }
                 MenuItem Train = new MenuItem { Header = "Trainers", IsEnabled = false };
                 MenuItem time = new MenuItem { Header = "Timing" };
-                MenuItem clients = new MenuItem { Header = "Clients" };
                 Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
+
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
                 menu.Items.Add(inf);
                 menu.Items.Add(act);
                 menu.Items.Add(time);
                 menu.Items.Add(Train);
-                menu.Items.Add(clients);
                 menu.Items.Add(account);
                 Menustack.Children.Add(menu);
+
+
+
+                //  grandStack.Visibility = Visibility.Collapsed;
+                poly1.Visibility = Visibility.Collapsed;
+                poly2.Visibility = Visibility.Collapsed;
+                poly3.Visibility = Visibility.Collapsed;
+                trener.Visibility = Visibility.Collapsed;
+                CostClass.Visibility = Visibility.Collapsed;
+                scroll.Visibility = Visibility.Collapsed;
+                button1.Visibility = Visibility.Visible;
+                button2.Visibility = Visibility.Visible;
+                button3.Visibility = Visibility.Visible;  
+                button1.Click += new RoutedEventHandler(EditButton);
+                button2.Click += new RoutedEventHandler(EditButton2);
+                button3.Click += new RoutedEventHandler(EditButton3);
+                //Trainer.Children.Add(button1);
+                //Trainer.Children.Add(button2);
+
+
+
+              
+
+
+                string sqlExp1 = $"SELECT Date_Time FROM Class";
+                using (SqlConnection connection1 = new SqlConnection(connectionString))
+                {
+                    connection1.Open();
+                    SqlCommand command1 = new SqlCommand(sqlExp1, connection1);
+                    SqlDataReader reader2 = command1.ExecuteReader();
+
+                    if (reader2.HasRows)
+                    {
+
+                       
+
+                        while (reader2.Read())
+                        {
+                            Dat = reader2.GetDateTime(0);
+
+
+
+                            string sqlExp = $"SELECT Id_Staff FROM Class WHERE Date_Time='{Dat}'";
+                            using (SqlConnection connection = new SqlConnection(connectionString))
+                            {
+                                connection.Open();
+                                SqlCommand command = new SqlCommand(sqlExp, connection);
+                                SqlDataReader reader1 = command.ExecuteReader();
+
+                                if (reader1.HasRows)
+                                {
+
+                                    while (reader1.Read())
+                                    {
+                                        id_subsc = reader1.GetInt32(0);
+
+
+                                    }
+                                }
+                                reader1.Close();
+
+
+                            }
+
+
+
+
+
+
+                            string sqlExp2 = $"SELECT Subscription FROM Staff WHERE Id_Staff={id_subsc}";
+                            using (SqlConnection connection3 = new SqlConnection(connectionString))
+                            {
+                                connection3.Open();
+                                SqlCommand command = new SqlCommand(sqlExp2, connection3);
+                                SqlDataReader reader3 = command.ExecuteReader();
+
+                                if (reader3.HasRows)
+                                {
+
+                                    while (reader3.Read())
+                                    {
+                                        type_sub = reader3.GetString(0);
+
+
+                                    }
+                                }
+                                reader3.Close();
+
+
+                            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            Grid gr = new Grid();
+                            var b = new System.Windows.Controls.Border
+                            {
+                                Margin = new Thickness(30),
+                                Background = Brushes.Red,
+                                Padding = new Thickness(10),
+
+                            };
+                            var TextA = new TextBlock
+                            {
+                                TextWrapping = TextWrapping.Wrap,
+                                Margin = new Thickness(10),
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                Text = type_sub,
+                                FontWeight = FontWeights.Bold,
+                                Foreground = Brushes.White,
+                            };
+                            TextB = new TextBox
+                            {
+                                TextWrapping = TextWrapping.Wrap,
+                                Margin = new Thickness(10),
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                Text = Dat.ToString(),
+
+                                FontWeight = FontWeights.Bold,
+                                IsEnabled = false
+                            };
+
+
+
+                            //var button1 = new Button
+                            //{
+                            //    Content = "Изменить",
+                            //};
+
+                            //var button2 = new Button
+                            //{
+                            //    Content = "Создать",
+                            //};
+
+                            gr.RowDefinitions.Add(new RowDefinition());
+                            gr.RowDefinitions.Add(new RowDefinition());
+                            // gr.RowDefinitions.Add(new RowDefinition());
+                            // gr.RowDefinitions.Add(new RowDefinition());
+                            Grid.SetColumn(TextA, 0);
+                            Grid.SetRow(TextA, 0);
+                            Grid.SetColumn(TextB, 1);
+                            Grid.SetRow(TextB, 1);
+                            //  Grid.SetColumn(button1, 2);
+                            //   Grid.SetRow(button1, 2);
+                            //   button1.Click += new RoutedEventHandler(EditButton);
+                            // Grid.SetColumn(button2, 3);
+                            // Grid.SetRow(button2, 3);
+                            // button2.Click += new RoutedEventHandler(EditButton2);
+                            gr.Children.Add(TextA);
+                            gr.Children.Add(TextB);
+                            //gr.Children.Add(button1);
+                            //gr.Children.Add(button2);
+                            b.Child = gr;
+
+                            gridTrainers.Children.Add(b);
+
+                        }
+                    }
+                    reader2.Close();
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             }
+
+
         }
-        public void InformLogin(object sender, RoutedEventArgs e)
+            public void InformLogin(object sender, RoutedEventArgs e)
         {
             this.Close();
             MainWindow mainWindow = new MainWindow(Role, User);
@@ -364,6 +695,37 @@ namespace FitnessClub
             TypesActivities types = new TypesActivities(Role, User);
             types.Show();
         }
+
+
+        public void EditButton(object sender, RoutedEventArgs e)
+        {
+            //Label label = new Label
+            //{
+            //    Content = this.Dat.ToString(),
+            //};
+            //gridTrainers.Children.Add(label);
+
+            EditRaspisanie types = new EditRaspisanie(Role, User);
+            types.Show();
+        }
+
+        public void EditButton2(object sender, RoutedEventArgs e)
+        {
+            
+
+            AddRaspisanie types = new AddRaspisanie(Role, User, Id_staff);
+            types.Show();
+        }
+
+        public void EditButton3(object sender, RoutedEventArgs e)
+        {
+
+
+            DeleteRaspisani types = new DeleteRaspisani(Role, User);
+            types.Show();
+        }
+
+
         public BitmapImage GetImageFromDatabaseStaff(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))

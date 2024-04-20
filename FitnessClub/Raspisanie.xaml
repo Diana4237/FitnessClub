@@ -15,20 +15,61 @@
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
 
+        <Style TargetType="Button">
+            <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+            <Setter Property="FontSize" Value="11"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Background" Value="Red"></Setter>
+            <Setter Property="Margin" Value="10"></Setter>
+            <Setter Property="Padding" Value="30,10,30,10"></Setter>
+            <Setter Property="Width" Value="150"></Setter>
+        </Style>
+
     </Window.Resources>
-    <DockPanel>
+    <DockPanel x:Name="doc">
         <StackPanel DockPanel.Dock="Top" Name="Menustack"></StackPanel>
-        <ScrollViewer VerticalScrollBarVisibility="Visible">
+         <UniformGrid Name="gridTrainers">
+           
+        </UniformGrid>
+        <StackPanel x:Name="Trainer"  DockPanel.Dock="Bottom">
+            <Button x:Name="button1" Visibility="Collapsed" >Изменить
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="button2" Visibility="Collapsed">Добавить
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button x:Name="button3" Visibility="Collapsed">Удалить
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+
+        </StackPanel>
+            <ScrollViewer  x:Name="scroll" VerticalScrollBarVisibility="Visible">
             <ScrollViewer.Background>
                 <ImageBrush ImageSource="images\BackTiming.jpg" Opacity="0.9"></ImageBrush>
             </ScrollViewer.Background>
+            
                 <Canvas x:Name="grandStack"  Margin="100" >
                 <TextBlock FontSize="26" Canvas.Top="30" Canvas.Left="-20" Name="NameTren" FontWeight="Bold">
                     <TextBlock.RenderTransform>
                         <RotateTransform Angle="+90"/>
                     </TextBlock.RenderTransform>
                 </TextBlock>
-                <Polygon Points="50,0 100,25 100,75 50,100 0,75 0,25" x:Name="poly1" Stroke="Black" StrokeThickness="2" Panel.ZIndex="2" Canvas.Top="-60" Canvas.Left="260">
+                <Polygon  Points="50,0 100,25 100,75 50,100 0,75 0,25" x:Name="poly1" Stroke="Black" StrokeThickness="2" Panel.ZIndex="2" Canvas.Top="-60" Canvas.Left="260">
                     <Polygon.RenderTransform>
                         <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
                     </Polygon.RenderTransform>

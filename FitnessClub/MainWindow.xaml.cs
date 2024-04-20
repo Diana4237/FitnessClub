@@ -50,10 +50,14 @@ namespace FitnessClub
                        MenuItem menuItem = new MenuItem { Header = title };
                         act.Items.Add(menuItem);
                     }
-                }
+                } 
             }
             MenuItem Train = new MenuItem { Header = "Trainers"};
             Train.Click += new RoutedEventHandler(TrainersClick);
+
+            MenuItem Subscription = new MenuItem { Header = "Subscription" };
+            Subscription.Click += new RoutedEventHandler(SubscriptionClick);
+
             Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
             MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
             account.Click+=new RoutedEventHandler(AccountClick);
@@ -97,8 +101,7 @@ namespace FitnessClub
                 Train.Click += new RoutedEventHandler(TrainersClickLogin);
                 MenuItem time = new MenuItem { Header = "Timing" };
                 time.Click += new RoutedEventHandler(TimeClick);
-                MenuItem sub = new MenuItem { Header = "Subscriptions" };
-                
+               
                 BitmapImage bitmapImage = GetImageFromDatabase(IdUser);
                 Image img=new Image { Width=40,Source=bitmapImage};
                 // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
@@ -139,6 +142,7 @@ namespace FitnessClub
                 MenuItem Train = new MenuItem { Header = "Trainers" };
                 Train.Click += new RoutedEventHandler(TrainersClickLogin);
                 MenuItem time = new MenuItem { Header = "Timing" };
+                time.Click += new RoutedEventHandler(TimeClick);
                 BitmapImage bitmapImage = GetImageFromDatabase(IdUser);
                 Image img = new Image { Width = 40, Source = bitmapImage };
                 // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
@@ -179,7 +183,9 @@ namespace FitnessClub
                 MenuItem Train = new MenuItem { Header = "Trainers" };
                 Train.Click += new RoutedEventHandler(TrainersClickLogin);
                 MenuItem time = new MenuItem { Header = "Timing" };
+                time.Click += new RoutedEventHandler(TimeClick);
                 MenuItem clients = new MenuItem { Header = "Clients" };
+                clients.Click += new RoutedEventHandler(ClientClick);
                 BitmapImage bitmapImage = GetImageFromDatabase(IdUser);
                 Image img = new Image { Width = 40, Source = bitmapImage };
                 // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
@@ -196,31 +202,45 @@ namespace FitnessClub
         }
         public void AccountClick(object sender, EventArgs e)
         {
-            this.Close();
+            //this.Close();
             Autorization autorization = new Autorization();
             autorization.Show();
         }
         public void MyAccountClick(object sender, EventArgs e)
         {
-            this.Close();
+           // this.Close();
             MyAccount autorization = new MyAccount(Role,User);
             autorization.Show();
         }
         public void TrainersClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+           // this.Close();
             Trainers t = new Trainers();
             t.Show();
         }
         public void TrainersClickLogin(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            //this.Close();
             Trainers t = new Trainers(Role, User);
             t.Show();
         }
+
+        public void SubscriptionClick(object sender, RoutedEventArgs e)
+        {
+           
+            Subscriptions t = new Subscriptions();
+            t.Show();
+        }
+
+        public void ClientClick(object sender, RoutedEventArgs e)
+        {
+            
+            Client t = new Client(User);
+            t.Show();
+        } 
         public void TimeClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+           // this.Close();
             Raspisanie t = new Raspisanie(Role,User);
             t.Show();
         }
@@ -228,13 +248,13 @@ namespace FitnessClub
 
         public void TypeAct(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            //this.Close();
             TypesActivities types = new TypesActivities();
             types.Show();
         }
         public void TypeActLogin(object sender, RoutedEventArgs e)
         {
-            this.Close();
+         //   this.Close();
             TypesActivities types = new TypesActivities(Role,User);
             types.Show();
         }
