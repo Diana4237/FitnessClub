@@ -208,6 +208,8 @@ namespace FitnessClub
                 MenuItem inf = new MenuItem { Header = "Infirmation About Club", IsEnabled = false };
                 MenuItem aadmins = new MenuItem { Header = "Admins" };
                 aadmins.Click += new RoutedEventHandler(ListAdmins);
+                MenuItem statistic = new MenuItem { Header="Dynamics of customer" };
+                statistic.Click += new RoutedEventHandler(Statistic);
                 BitmapImage bitmapImage = GetImageFromDatabaseStaff(IdUser);
                 Image img = new Image { Width = 40, Source = bitmapImage };
                 
@@ -215,9 +217,16 @@ namespace FitnessClub
                 account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
                 menu.Items.Add(aadmins);
+                menu.Items.Add(statistic);
                 menu.Items.Add(account);
                 Menustack.Children.Add(menu);
             }
+        }
+        public void Statistic(object sender, EventArgs e)
+        {
+            //this.Close();
+            OwnerStatistic autorization = new OwnerStatistic(User);
+            autorization.Show();
         }
         public void AccountClick(object sender, EventArgs e)
         {

@@ -263,5 +263,8 @@
   <ItemGroup>
     <Resource Include="images\rasp2.JPG" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\salut.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
