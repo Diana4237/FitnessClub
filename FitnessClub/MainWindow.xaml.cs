@@ -102,7 +102,7 @@ namespace FitnessClub
                 MenuItem time = new MenuItem { Header = "Timing" };
                 time.Click += new RoutedEventHandler(TimeClick);
                
-                BitmapImage bitmapImage = GetImageFromDatabase(IdUser);
+                BitmapImage bitmapImage = GetImageFromDatabaseCl(IdUser);
                 Image img=new Image { Width=40,Source=bitmapImage};
                 // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
@@ -143,7 +143,7 @@ namespace FitnessClub
                 Train.Click += new RoutedEventHandler(TrainersClickLogin);
                 MenuItem time = new MenuItem { Header = "Timing" };
                 time.Click += new RoutedEventHandler(TimeClick);
-                BitmapImage bitmapImage = GetImageFromDatabase(IdUser);
+                BitmapImage bitmapImage = GetImageFromDatabaseStaff(IdUser);
                 Image img = new Image { Width = 40, Source = bitmapImage };
                 // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
@@ -186,7 +186,7 @@ namespace FitnessClub
                 time.Click += new RoutedEventHandler(TimeClick);
                 MenuItem clients = new MenuItem { Header = "Clients" };
                 clients.Click += new RoutedEventHandler(ClientClick);
-                BitmapImage bitmapImage = GetImageFromDatabase(IdUser);
+                BitmapImage bitmapImage = GetImageFromDatabaseStaff(IdUser);
                 Image img = new Image { Width = 40, Source = bitmapImage };
                 // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
@@ -196,6 +196,25 @@ namespace FitnessClub
                 menu.Items.Add(time);
                 menu.Items.Add(Train);
                 menu.Items.Add(clients);
+                menu.Items.Add(account);
+                Menustack.Children.Add(menu);
+            }
+            if (idRole == 4)
+            {
+                var factoryPanel = new FrameworkElementFactory(typeof(DockPanel));
+                ItemsPanelTemplate it = new ItemsPanelTemplate { VisualTree = factoryPanel };
+                Menu menu = new Menu { Background = new SolidColorBrush(Colors.Red), ItemsPanel = it };
+
+                MenuItem inf = new MenuItem { Header = "Infirmation About Club", IsEnabled = false };
+                MenuItem aadmins = new MenuItem { Header = "Admins" };
+                aadmins.Click += new RoutedEventHandler(ListAdmins);
+                BitmapImage bitmapImage = GetImageFromDatabaseStaff(IdUser);
+                Image img = new Image { Width = 40, Source = bitmapImage };
+                
+                MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
+                account.Click += new RoutedEventHandler(MyAccountClick);
+                menu.Items.Add(inf);
+                menu.Items.Add(aadmins);
                 menu.Items.Add(account);
                 Menustack.Children.Add(menu);
             }
@@ -224,7 +243,12 @@ namespace FitnessClub
             Trainers t = new Trainers(Role, User);
             t.Show();
         }
-
+        public void ListAdmins(object sender, RoutedEventArgs e)
+        {
+            //this.Close();
+            Admins t = new Admins(User);
+            t.Show();
+        }
         public void SubscriptionClick(object sender, RoutedEventArgs e)
         {
            
@@ -258,13 +282,43 @@ namespace FitnessClub
             TypesActivities types = new TypesActivities(Role,User);
             types.Show();
         }
-        public BitmapImage GetImageFromDatabase(int id)
+        public BitmapImage GetImageFromDatabaseStaff(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var query = $"SELECT Photo FROM Staff WHERE Id_staff = '{id}' AND Photo IS NOT NUll";
+                // string query = $"SELECT Photo FROM Doctors WHERE Id = '{id}' AND Photo IS NOT NUll";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            byte[] imageData = (byte[])reader["Photo"];
+                            BitmapImage bitmapImage = new BitmapImage();
+                            using (MemoryStream stream = new MemoryStream(imageData))
+                            {
+                                bitmapImage.BeginInit();
+                                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                                bitmapImage.StreamSource = stream;
+                                bitmapImage.EndInit();
+                            }
+                            return bitmapImage;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+        public BitmapImage GetImageFromDatabaseCl(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 var query = $"SELECT Photo FROM Client WHERE Id_client = '{id}' AND Photo IS NOT NUll";
-               // string query = $"SELECT Photo FROM Doctors WHERE Id = '{id}' AND Photo IS NOT NUll";
+                // string query = $"SELECT Photo FROM Doctors WHERE Id = '{id}' AND Photo IS NOT NUll";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessClub"
         mc:Ignorable="d"
-        Title="AddRaspisanie" Height="450" Width="800">
+        Title="AddRaspisanie" Height="500" Width="500">
     <Window.Resources>
         <Style TargetType="MenuItem">
             <Setter Property="Padding" Value="20"/>
@@ -25,15 +25,32 @@
             <Setter Property="Padding" Value="30,10,30,10"></Setter>
             <Setter Property="Width" Value="150"></Setter>
         </Style>
-
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Foreground" Value="Red"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+            <Setter Property="Width" Value="300"></Setter>
+            <Setter Property="Height" Value="45"></Setter>
+            <Setter Property="Margin" Value="20,10,20,30"></Setter>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Foreground" Value="Red"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Margin" Value="20,0,20,0"></Setter>
+        </Style>
     </Window.Resources>
     <DockPanel x:Name="doc">
+        <DockPanel.Background>
+            <ImageBrush ImageSource="images/rasp2.jpg" Stretch="UniformToFill" Opacity="0.9"></ImageBrush>
+        </DockPanel.Background>
         <StackPanel DockPanel.Dock="Top" Name="Menustack"></StackPanel> 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black">
             <Label Content="Ведите время занятия:" HorizontalAlignment="Center"  />
-            <TextBox x:Name="time" MaxWidth="150" Text="2024-01-01 08:00:00.000"/>
+            <TextBox x:Name="time" MaxLength="25" Text="2024-01-01 08:00:00.000" TextWrapping="Wrap"/>
         <Label Content="Ведите номер зала:" HorizontalAlignment="Center" />
-            <TextBox x:Name="hall" MaxWidth="150" />
+            <TextBox x:Name="hall" MaxLength="100" TextWrapping="Wrap"/>
             <Label Name="lab1" Content="Выберите фамилию тренера:" HorizontalAlignment="Center"  Visibility="Collapsed" />
             <ComboBox Name="staff" MaxWidth="150" Visibility="Collapsed"/>
 

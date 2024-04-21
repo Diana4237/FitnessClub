@@ -6,13 +6,26 @@
         xmlns:local="clr-namespace:FitnessClub"
         mc:Ignorable="d"
         Title="EditRaspisanie" Height="500" Width="500">
-   
-    <DockPanel Background="red" Name="dock">
-        
-        <StackPanel   Name="stack" Orientation="Vertical" VerticalAlignment="Center">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+            <Setter Property="FontSize" Value="11"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Background" Value="Red"></Setter>
+            <Setter Property="Margin" Value="10"></Setter>
+            <Setter Property="Padding" Value="30,10,30,10"></Setter>
+            <Setter Property="Width" Value="150"></Setter>
+        </Style>
+    </Window.Resources>
+    <DockPanel  Name="dock">
+        <DockPanel.Background>
+            <ImageBrush ImageSource="images/rasp2.jpg" Stretch="UniformToFill" Opacity="0.9"></ImageBrush>
+        </DockPanel.Background>
+        <StackPanel Background="black"  Name="stack" Orientation="Vertical" VerticalAlignment="Center" Margin="20" >
 
-            <ListBox Name="list" />
-            <ListBox Name="list2" Visibility="Collapsed" />
+            <ListBox Name="list" Margin="20" />
+            <ListBox Name="list2" Visibility="Collapsed" Margin="20"/>
             <Button Content="Edit" Click="EditButton"/>
             <!--<Calendar  Name="calend"/>
             <Label Content="Hour"/>

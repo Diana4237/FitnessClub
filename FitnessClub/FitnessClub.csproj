@@ -71,6 +71,9 @@
     <Compile Include="AddTrainer.xaml.cs">
       <DependentUpon>AddTrainer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Admins.xaml.cs">
+      <DependentUpon>Admins.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Autorization.xaml.cs">
       <DependentUpon>Autorization.xaml</DependentUpon>
     </Compile>
@@ -88,6 +91,12 @@
     </Compile>
     <Compile Include="MyAccount.xaml.cs">
       <DependentUpon>MyAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OwnerAdminAdd.xaml.cs">
+      <DependentUpon>OwnerAdminAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OwnerStatistic.xaml.cs">
+      <DependentUpon>OwnerStatistic.xaml</DependentUpon>
     </Compile>
     <Compile Include="Raspisanie.xaml.cs">
       <DependentUpon>Raspisanie.xaml</DependentUpon>
@@ -110,6 +119,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddTrainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admins.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,6 +160,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MyAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OwnerAdminAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OwnerStatistic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,6 +259,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\BackAcc.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\rasp2.JPG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,57 @@
+﻿<Window x:Class="FitnessClub.Admins"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FitnessClub"
+        mc:Ignorable="d"
+        Title="Admins" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="MenuItem">
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Background" Value="Red"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+            <Setter Property="FontSize" Value="11"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Background" Value="Red"></Setter>
+            <Setter Property="Margin" Value="10"></Setter>
+            <Setter Property="Padding" Value="30,10,30,10"></Setter>
+            <Setter Property="Width" Value="150"></Setter>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Name="Menustack">
+
+        </StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Visible">
+
+            <Grid DockPanel.Dock="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.Background>
+                    <ImageBrush ImageSource="images\trainers.JPG" ></ImageBrush>
+                </Grid.Background>
+                <UniformGrid Name="gridTrainers" Grid.Row="1">
+                </UniformGrid>
+                <StackPanel Grid.Row="0">
+                    <Button Content="Add admin" Visibility="Collapsed" Name="butAddT" HorizontalAlignment="Right" Width="100" Click="Addadmin">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </DockPanel>
+</Window>
