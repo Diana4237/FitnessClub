@@ -126,7 +126,7 @@ namespace FitnessClub
                 BitmapImage bitmapImage = GetImageFromDatabaseStaff(IdUser);
                 Image img = new Image { Width = 40, Source = bitmapImage };
                 // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
-                System.Windows.Controls.MenuItem account = new System.Windows.Controls.MenuItem { Header = img };
+                System.Windows.Controls.MenuItem account = new System.Windows.Controls.MenuItem { Header = img, HorizontalAlignment = System.Windows.HorizontalAlignment.Right };
                 account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
                 menu.Items.Add(act);
@@ -184,7 +184,7 @@ namespace FitnessClub
                 System.Windows.Controls.MenuItem clients = new System.Windows.Controls.MenuItem { Header = "Clients" };
                 BitmapImage bitmapImage = GetImageFromDatabaseStaff(IdUser);
                 Image img = new Image { Width = 40, Source = bitmapImage };
-                System.Windows.Controls.MenuItem account = new System.Windows.Controls.MenuItem { Header = img };
+                System.Windows.Controls.MenuItem account = new System.Windows.Controls.MenuItem { Header = img, HorizontalAlignment = System.Windows.HorizontalAlignment.Right };
                 account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
                 menu.Items.Add(act);
@@ -212,6 +212,31 @@ namespace FitnessClub
                 }
                 imgAcc.ImageSource = GetImageFromDatabaseStaff(IdUser);
             }
+            if (idRole == 4)
+            {
+                var factoryPanel = new FrameworkElementFactory(typeof(DockPanel));
+                ItemsPanelTemplate it = new ItemsPanelTemplate { VisualTree = factoryPanel };
+                System.Windows.Controls.Menu menu = new System.Windows.Controls.Menu { Background = new SolidColorBrush(Colors.Red), ItemsPanel = it };
+
+                System.Windows.Controls.MenuItem inf = new System.Windows.Controls.MenuItem { Header = "Infirmation About Club", IsEnabled = false };
+                System.Windows.Controls.MenuItem aadmins = new System.Windows.Controls.MenuItem { Header = "Admins" };
+                aadmins.Click += new RoutedEventHandler(ListAdmins);
+                BitmapImage bitmapImage = GetImageFromDatabaseStaff(IdUser);
+                Image img = new Image { Width = 40, Source = bitmapImage };
+
+                System.Windows.Controls.MenuItem account = new System.Windows.Controls.MenuItem { Header = img, HorizontalAlignment = System.Windows.HorizontalAlignment.Right };
+                account.Click += new RoutedEventHandler(MyAccountClick);
+                menu.Items.Add(inf);
+                menu.Items.Add(aadmins);
+                menu.Items.Add(account);
+                Menustack.Children.Add(menu);
+            }
+        }
+        public void ListAdmins(object sender, RoutedEventArgs e)
+        {
+            //this.Close();
+            Admins t = new Admins(User);
+            t.Show();
         }
         public void MyAccountClick(object sender, EventArgs e)
         {
