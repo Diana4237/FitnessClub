@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
@@ -36,15 +37,41 @@ namespace FitnessClub
 
             MenuItem inf = new MenuItem { Header = "Infirmation About Club" };
             inf.Click += new RoutedEventHandler(Inform);
+            System.Windows.Controls.MenuItem act = new System.Windows.Controls.MenuItem { Header = "Types Of Sport Activities" };
+            act.Click += new RoutedEventHandler(TypeAct);
+            string sqlExpression = "SELECT Title FROM Type_subscription";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlExpression, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        string title = reader.GetString(0);
+                        System.Windows.Controls.MenuItem menuItem = new System.Windows.Controls.MenuItem { Header = title };
+                        act.Items.Add(menuItem);
+                    }
+                }
+            }
+            System.Windows.Controls.MenuItem Train = new System.Windows.Controls.MenuItem { Header = "Trainers" };
+            Train.Click += new RoutedEventHandler(TrainersClick);
             MenuItem aadmins = new MenuItem { Header = "Admins", IsEnabled = false };
-           // aadmins.Click += new RoutedEventHandler(ListAdmins);
+            MenuItem statistic = new MenuItem { Header = "Dynamics of customer" };
+            statistic.Click += new RoutedEventHandler(Statistic);
+            // aadmins.Click += new RoutedEventHandler(ListAdmins);
             BitmapImage bitmapImage = GetImageFromDatabaseStaff(IdUser);
             Image img = new Image { Width = 40, Source = bitmapImage };
             // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
             MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
             account.Click += new RoutedEventHandler(MyAccountClick);
             menu.Items.Add(inf);
+            menu.Items.Add(act);
+            menu.Items.Add(Train);
             menu.Items.Add(aadmins);
+
+            menu.Items.Add(statistic);
             menu.Items.Add(account);
             Menustack.Children.Add(menu);
             butAddT.Visibility = Visibility.Visible;
@@ -131,6 +158,24 @@ namespace FitnessClub
                 reader.Close();
             }
            
+        }
+        public void TrainersClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            Trainers t = new Trainers(4, User);
+            t.Show();
+        }
+
+        public void TypeAct(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            TypesActivities types = new TypesActivities(4, User);
+            types.Show();
+        }
+        public void Statistic(object sender, RoutedEventArgs e)
+        {
+            OwnerStatistic ownerStatistic = new OwnerStatistic(User);
+            ownerStatistic.Show();
         }
         public void Inform(object sender, RoutedEventArgs e)
         {

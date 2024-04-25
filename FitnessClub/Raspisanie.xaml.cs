@@ -77,8 +77,9 @@ namespace FitnessClub
                     }
                     reader.Close();
                 }
-                MenuItem Train = new MenuItem { Header = "Trainers", IsEnabled = false };
-                MenuItem time = new MenuItem { Header = "Timing" };
+                MenuItem Train = new MenuItem { Header = "Trainers" };
+                Train.Click += new RoutedEventHandler(TrainersClick);
+                MenuItem time = new MenuItem { Header = "Timing", IsEnabled = false };
                 BitmapImage bitmapImage = GetImageFromDatabaseCl(id_user);
                 Image img = new Image { Width = 40, Source = bitmapImage };
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
@@ -303,11 +304,14 @@ namespace FitnessClub
                     }
                 }
                 
-                MenuItem Train = new MenuItem { Header = "Trainers", IsEnabled = false };
-                MenuItem time = new MenuItem { Header = "Timing" };
-                Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
+                MenuItem Train = new MenuItem { Header = "Trainers" };
+                Train.Click += new RoutedEventHandler(TrainersClick);
+                MenuItem time = new MenuItem { Header = "Timing", IsEnabled = false };
+                BitmapImage bitmapImage = GetImageFromDatabaseStaff(id_user);
+                Image img = new Image { Width = 40, Source = bitmapImage };
 
-                MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
+                System.Windows.Controls.MenuItem account = new System.Windows.Controls.MenuItem { Header = img, HorizontalAlignment = System.Windows.HorizontalAlignment.Right };
+                account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
                 menu.Items.Add(act);
                 menu.Items.Add(time);
@@ -460,15 +464,21 @@ namespace FitnessClub
                         }
                     }
                 }
-                MenuItem Train = new MenuItem { Header = "Trainers", IsEnabled = false };
-                MenuItem time = new MenuItem { Header = "Timing" };
-                Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
+                MenuItem Train = new MenuItem { Header = "Trainers" };
+                Train.Click += new RoutedEventHandler(TrainersClick);
+                MenuItem time = new MenuItem { Header = "Timing", IsEnabled = false };
+                System.Windows.Controls.MenuItem clients = new System.Windows.Controls.MenuItem { Header = "Clients" };
+                clients.Click += new RoutedEventHandler(ClientClick);
+                BitmapImage bitmapImage = GetImageFromDatabaseStaff(id_user);
+                Image img = new Image { Width = 40, Source = bitmapImage };
 
-                MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
+                System.Windows.Controls.MenuItem account = new System.Windows.Controls.MenuItem { Header = img, HorizontalAlignment = System.Windows.HorizontalAlignment.Right };
+                account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
                 menu.Items.Add(act);
                 menu.Items.Add(time);
                 menu.Items.Add(Train);
+                menu.Items.Add(clients);
                 menu.Items.Add(account);
                 Menustack.Children.Add(menu);
 
@@ -562,36 +572,6 @@ namespace FitnessClub
 
                             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             Grid gr = new Grid();
                             var b = new System.Windows.Controls.Border
                             {
@@ -658,26 +638,23 @@ namespace FitnessClub
                     }
                     reader2.Close();
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
 
 
         }
-            public void InformLogin(object sender, RoutedEventArgs e)
+        public void ClientClick(object sender, RoutedEventArgs e)
+        {
+
+            Client t = new Client(User);
+            t.Show();
+        }
+        public void TrainersClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            Trainers t = new Trainers(Role, User);
+            t.Show();
+        }
+        public void InformLogin(object sender, RoutedEventArgs e)
         {
             this.Close();
             MainWindow mainWindow = new MainWindow(Role, User);
@@ -699,12 +676,6 @@ namespace FitnessClub
 
         public void EditButton(object sender, RoutedEventArgs e)
         {
-            //Label label = new Label
-            //{
-            //    Content = this.Dat.ToString(),
-            //};
-            //gridTrainers.Children.Add(label);
-
             EditRaspisanie types = new EditRaspisanie(Role, User);
             types.Show();
         }

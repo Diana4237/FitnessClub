@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -182,6 +183,7 @@ namespace FitnessClub
                 Train.Click += new RoutedEventHandler(TrainersClick);
                 System.Windows.Controls.MenuItem time = new System.Windows.Controls.MenuItem { Header = "Timing" };
                 System.Windows.Controls.MenuItem clients = new System.Windows.Controls.MenuItem { Header = "Clients" };
+                clients.Click += new RoutedEventHandler(ClientClick);
                 BitmapImage bitmapImage = GetImageFromDatabaseStaff(IdUser);
                 Image img = new Image { Width = 40, Source = bitmapImage };
                 System.Windows.Controls.MenuItem account = new System.Windows.Controls.MenuItem { Header = img, HorizontalAlignment = System.Windows.HorizontalAlignment.Right };
@@ -218,19 +220,74 @@ namespace FitnessClub
                 ItemsPanelTemplate it = new ItemsPanelTemplate { VisualTree = factoryPanel };
                 System.Windows.Controls.Menu menu = new System.Windows.Controls.Menu { Background = new SolidColorBrush(Colors.Red), ItemsPanel = it };
 
-                System.Windows.Controls.MenuItem inf = new System.Windows.Controls.MenuItem { Header = "Infirmation About Club", IsEnabled = false };
+                System.Windows.Controls.MenuItem inf = new System.Windows.Controls.MenuItem { Header = "Infirmation About Club"};
+                inf.Click += new RoutedEventHandler(Inform);
+                System.Windows.Controls.MenuItem act = new System.Windows.Controls.MenuItem { Header = "Types Of Sport Activities" };
+                act.Click += new RoutedEventHandler(TypeAct);
+                string sqlExpression = "SELECT Title FROM Type_subscription";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(sqlExpression, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            string title = reader.GetString(0);
+                            System.Windows.Controls.MenuItem menuItem = new System.Windows.Controls.MenuItem { Header = title };
+                            act.Items.Add(menuItem);
+                        }
+                    }
+                }
+                System.Windows.Controls.MenuItem Train = new System.Windows.Controls.MenuItem { Header = "Trainers" };
+                Train.Click += new RoutedEventHandler(TrainersClick);
                 System.Windows.Controls.MenuItem aadmins = new System.Windows.Controls.MenuItem { Header = "Admins" };
                 aadmins.Click += new RoutedEventHandler(ListAdmins);
+                System.Windows.Controls.MenuItem statistic = new System.Windows.Controls.MenuItem { Header = "Dynamics of customer" };
+                statistic.Click += new RoutedEventHandler(Statistic);
                 BitmapImage bitmapImage = GetImageFromDatabaseStaff(IdUser);
                 Image img = new Image { Width = 40, Source = bitmapImage };
 
                 System.Windows.Controls.MenuItem account = new System.Windows.Controls.MenuItem { Header = img, HorizontalAlignment = System.Windows.HorizontalAlignment.Right };
                 account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
+                menu.Items.Add(act);
+                menu.Items.Add(Train);
                 menu.Items.Add(aadmins);
+                menu.Items.Add(statistic);
                 menu.Items.Add(account);
                 Menustack.Children.Add(menu);
+                string sqlMydata = $"SELECT FirstName, LastName, Patronymic, Telephone FROM Staff WHERE Id_staff='{IdUser}'";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(sqlMydata, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            string title = reader.GetString(1) + " " + reader.GetString(0);
+                            fio.Text += title;
+                            string phone = reader.GetString(2);
+                            phon.Text += phone;
+                        }
+                    }
+                }
+                imgAcc.ImageSource = GetImageFromDatabaseStaff(IdUser);
             }
+        }
+        public void ClientClick(object sender, RoutedEventArgs e)
+        {
+
+            Client t = new Client(User);
+            t.Show();
+        }
+        public void Statistic(object sender, RoutedEventArgs e)
+        {
+            OwnerStatistic ownerStatistic = new OwnerStatistic(User);
+            ownerStatistic.Show();
         }
         public void ListAdmins(object sender, RoutedEventArgs e)
         {

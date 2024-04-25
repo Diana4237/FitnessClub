@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessClub"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
         Title="OwnerStatistic" Height="550" Width="800">
     <Window.Resources>
@@ -28,11 +29,16 @@
     <DockPanel>
     <StackPanel>
             <StackPanel.Background>
-                <VisualBrush>
-                    <VisualBrush.Visual>
-        <MediaElement Name="gif" Source="images\salut.gif" UnloadedBehavior="Manual" LoadedBehavior="Play" MediaEnded="gif_Media" />
-                    </VisualBrush.Visual>
-                </VisualBrush>
+                <ImageBrush ImageSource="images\salut.gif" />
+                   
+                <!--<Grid>
+                <gif:ImageBehavior.GifSource>
+                    <BitmapImage UriSource="images\salut.gif"/>
+                </gif:ImageBehavior.GifSource>
+            </Grid>-->
+            <!--<MediaElement Name="gif" Source="images\salut.gif" UnloadedBehavior="Manual" LoadedBehavior="Play" MediaEnded="gif_Media" />-->
+                    <!--</VisualBrush.Visual>
+                </VisualBrush>-->
             </StackPanel.Background>
             <StackPanel Name="Menustack"></StackPanel>
             <StackPanel HorizontalAlignment="Center" Margin="0,140,0,0" Background="Black" >
