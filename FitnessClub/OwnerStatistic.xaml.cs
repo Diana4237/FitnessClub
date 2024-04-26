@@ -31,7 +31,7 @@ namespace FitnessClub
             User = IdUser;
             DateTime now= DateTime.Now;
             int year=now.Year;
-            string sqlExpression = $"SELECT COUNT(*) FROM Users WHERE DateReg>'{year}-01-01 00:00:00.000'";
+            string sqlExpression = $"SELECT COUNT(*) FROM Users WHERE DateReg>'{year}-01-01 00:00:00.000' AND IdRole=1";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();

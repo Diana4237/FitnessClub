@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:FitnessClub"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
-        Title="OwnerStatistic" Height="550" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="OwnerStatistic" Height="650" Width="900">
     <Window.Resources>
         <Style TargetType="MenuItem">
             <Setter Property="Padding" Value="20"/>
@@ -31,14 +32,7 @@
             <StackPanel.Background>
                 <ImageBrush ImageSource="images\salut.gif" />
                    
-                <!--<Grid>
-                <gif:ImageBehavior.GifSource>
-                    <BitmapImage UriSource="images\salut.gif"/>
-                </gif:ImageBehavior.GifSource>
-            </Grid>-->
-            <!--<MediaElement Name="gif" Source="images\salut.gif" UnloadedBehavior="Manual" LoadedBehavior="Play" MediaEnded="gif_Media" />-->
-                    <!--</VisualBrush.Visual>
-                </VisualBrush>-->
+             
             </StackPanel.Background>
             <StackPanel Name="Menustack"></StackPanel>
             <StackPanel HorizontalAlignment="Center" Margin="0,140,0,0" Background="Black" >

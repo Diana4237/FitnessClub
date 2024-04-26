@@ -84,11 +84,6 @@ namespace FitnessClub
 
                                 }
 
-
-
-
-
-
                                 string sqlExp2 = $"SELECT Subscription FROM Staff WHERE Id_Staff={id_staff}";
                                 using (SqlConnection connection3 = new SqlConnection(connectionString))
                                 {
@@ -115,28 +110,6 @@ namespace FitnessClub
                         }
                     }
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
 
 
@@ -171,16 +144,11 @@ namespace FitnessClub
 
                         if (rowsAffected > 0)
                         {
-
-
-
-
-
-                            MessageBox.Show("Дата успешно удалена");
+                            MessageBox.Show("Successfully deleted");
                         }
                         else
                         {
-                            MessageBox.Show("Ошибка при удалении данных.");
+                            MessageBox.Show("Delition error.");
                         }
                     }
 
@@ -188,7 +156,7 @@ namespace FitnessClub
             }
             catch
             {
-                MessageBox.Show("Ошибка.");
+                MessageBox.Show("Error.");
             }
 
         }

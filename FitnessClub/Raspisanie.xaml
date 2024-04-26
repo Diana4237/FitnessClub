@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessClub"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="Raspisanie" Height="650" Width="800">
     <Window.Resources>
         <Style TargetType="MenuItem">
@@ -30,17 +31,20 @@
     <DockPanel x:Name="doc">
         <StackPanel DockPanel.Dock="Top" Name="Menustack"></StackPanel>
          <UniformGrid Name="gridTrainers">
-           
+            <UniformGrid.Background>
+                <ImageBrush ImageSource="images\BackTiming.jpg" Opacity="0.9"></ImageBrush>
+            </UniformGrid.Background>
         </UniformGrid>
         <StackPanel x:Name="Trainer"  DockPanel.Dock="Bottom">
-            <Button x:Name="button1" Visibility="Collapsed" >Изменить
+           
+            <Button x:Name="button1" Visibility="Collapsed" >Edit
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button x:Name="button2" Visibility="Collapsed">Добавить
+            <Button x:Name="button2" Visibility="Collapsed">Add
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
@@ -48,7 +52,7 @@
                 </Button.Resources>
             </Button>
 
-            <Button x:Name="button3" Visibility="Collapsed">Удалить
+            <Button x:Name="button3" Visibility="Collapsed">Delete
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>

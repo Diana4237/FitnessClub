@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessClub"
         mc:Ignorable="d"
-        Title="Admins" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="Admins" Height="650" Width="900">
     <Window.Resources>
         <Style TargetType="MenuItem">
             <Setter Property="Padding" Value="20"/>
@@ -42,7 +43,7 @@
                 <UniformGrid Name="gridTrainers" Grid.Row="1">
                 </UniformGrid>
                 <StackPanel Grid.Row="0">
-                    <Button Content="Add admin" Visibility="Collapsed" Name="butAddT" HorizontalAlignment="Right" Width="100" Click="Addadmin">
+                    <Button Content="Add admin" Visibility="Collapsed" Name="butAddT" HorizontalAlignment="Right" Width="200" Click="Addadmin">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5"/>

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessClub"
-        mc:Ignorable="d"
+        mc:Ignorable="d" 
         WindowStartupLocation="CenterScreen"
         Title="Trainers" Height="650" Width="800">
     <Window.Resources>
@@ -43,7 +43,7 @@
                 <UniformGrid Name="gridTrainers" Grid.Row="1">
                 </UniformGrid>
                 <StackPanel Grid.Row="0">
-                    <Button Content="Add trainer" Visibility="Collapsed" Name="butAddT" HorizontalAlignment="Right" Width="100" Click="AddTren">
+                    <Button Content="Add trainer" Visibility="Collapsed" Name="butAddT" HorizontalAlignment="Right" Width="200" Click="AddTren">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5"/>

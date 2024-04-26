@@ -93,7 +93,7 @@ namespace FitnessClub
                     }
                 }
                 MenuItem Train = new MenuItem { Header = "Trainers" };
-                Train.Click += new RoutedEventHandler(TrainersClick);
+                Train.Click += new RoutedEventHandler(TrainersClickLogin);
                 MenuItem time = new MenuItem { Header = "Timing" };
                 time.Click += new RoutedEventHandler(TimeClick);
                 BitmapImage bitmapImage = GetImageFromDatabaseCl(idUser);
@@ -134,7 +134,7 @@ namespace FitnessClub
                     }
                 }
                 MenuItem Train = new MenuItem { Header = "Trainers"};
-                Train.Click += new RoutedEventHandler(TrainersClick);
+                Train.Click += new RoutedEventHandler(TrainersClickLogin);
                 MenuItem time = new MenuItem { Header = "Timing" };
                 time.Click += new RoutedEventHandler(TimeClick);
                 BitmapImage bitmapImage = GetImageFromDatabaseStaff(idUser);
@@ -175,7 +175,7 @@ namespace FitnessClub
                     }
                 }
                 MenuItem Train = new MenuItem { Header = "Trainers" };
-                Train.Click += new RoutedEventHandler(TrainersClick);
+                Train.Click += new RoutedEventHandler(TrainersClickLogin);
                 MenuItem time = new MenuItem { Header = "Timing" };
                 time.Click += new RoutedEventHandler(TimeClick);
                 MenuItem clients = new MenuItem { Header = "Clients" };
@@ -204,25 +204,10 @@ namespace FitnessClub
                 System.Windows.Controls.MenuItem inf = new System.Windows.Controls.MenuItem { Header = "Infirmation About Club" };
                 inf.Click += new RoutedEventHandler(InformLogin);
                 System.Windows.Controls.MenuItem act = new System.Windows.Controls.MenuItem { Header = "Types Of Sport Activities", IsEnabled = false };
-                act.Click += new RoutedEventHandler(TypeAct);
-                string sqlExpression = "SELECT Title FROM Type_subscription";
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(sqlExpression, connection);
-                    SqlDataReader reader = command.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-                            string title = reader.GetString(0);
-                            System.Windows.Controls.MenuItem menuItem = new System.Windows.Controls.MenuItem { Header = title };
-                            act.Items.Add(menuItem);
-                        }
-                    }
-                }
+               // act.Click += new RoutedEventHandler(TypeAct);
+                
                 System.Windows.Controls.MenuItem Train = new System.Windows.Controls.MenuItem { Header = "Trainers" };
-                Train.Click += new RoutedEventHandler(TrainersClick);
+                Train.Click += new RoutedEventHandler(TrainersClickLogin);
                 System.Windows.Controls.MenuItem aadmins = new System.Windows.Controls.MenuItem { Header = "Admins" };
                 aadmins.Click += new RoutedEventHandler(ListAdmins);
                 System.Windows.Controls.MenuItem statistic = new System.Windows.Controls.MenuItem { Header = "Dynamics of customer" };
@@ -307,6 +292,12 @@ namespace FitnessClub
             }
             return null;
         }
+        public void TypeActLogin(object sender, RoutedEventArgs e)
+        {
+            //   this.Close();
+            TypesActivities types = new TypesActivities(Role, User);
+            types.Show();
+        }
         public void ClientClick(object sender, RoutedEventArgs e)
         {
 
@@ -345,6 +336,12 @@ namespace FitnessClub
         {
             //this.Close();
             Trainers t = new Trainers();
+            t.Show();
+        }
+        public void TrainersClickLogin(object sender, RoutedEventArgs e)
+        {
+            //this.Close();
+            Trainers t = new Trainers(Role, User);
             t.Show();
         }
         public void TypeAct(object sender, RoutedEventArgs e)

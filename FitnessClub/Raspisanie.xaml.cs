@@ -60,6 +60,7 @@ namespace FitnessClub
                 MenuItem inf = new MenuItem { Header = "Infirmation About Club" };
                 inf.Click += new RoutedEventHandler(InformLogin);
                 MenuItem act = new MenuItem { Header = "Types Of Sport Activities" };
+                act.Click += new RoutedEventHandler(TypeActLogin);
                 string sqlExpression = "SELECT Title FROM Type_subscription";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -251,31 +252,48 @@ namespace FitnessClub
                     poly2.Fill = myBrush2;
                     poly3.Fill = myBrush3;
                 }
+                if (title == "Pilates")
+                {
+                    ImageBrush myBrush = new ImageBrush
+                    {
+                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/StepClass.JPG"))
+                    };
+                    ImageBrush myBrush2 = new ImageBrush
+                    {
+                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/step2.JPG"))
+                    };
+                    ImageBrush myBrush3 = new ImageBrush
+                    {
+                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/step1.jpeg"))
+                    };
+                    poly1.Fill = myBrush;
+                    poly2.Fill = myBrush2;
+                    poly3.Fill = myBrush3;
+                }
+                if (title == "Swimming")
+                {
+                    ImageBrush myBrush = new ImageBrush
+                    {
+                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/StepClass.JPG"))
+                    };
+                    ImageBrush myBrush2 = new ImageBrush
+                    {
+                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/step2.JPG"))
+                    };
+                    ImageBrush myBrush3 = new ImageBrush
+                    {
+                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/step1.jpeg"))
+                    };
+                    poly1.Fill = myBrush;
+                    poly2.Fill = myBrush2;
+                    poly3.Fill = myBrush3;
+                }
                 Class.Text += title;
                 string [] date=date_time.ToString().Split(' ');
                 Time.Text+= date[1].Substring(0, date[1].Length - 3);
                 Date.Text+= date[0];
                 CostClass.Text+= cost.ToString();
-                //BitmapImage bitmapImage = new BitmapImage();
-                //using (MemoryStream stream = new MemoryStream(photo))
-                //{
-                //    bitmapImage.BeginInit();
-                //    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                //    bitmapImage.StreamSource = stream;
-                //    bitmapImage.EndInit();
-                //}
-
-                //img.Source= bitmapImage;
-
-
-
-
-
-
-
-
-
-
+ 
 
             }
             if (idRole == 2)
@@ -287,6 +305,7 @@ namespace FitnessClub
                 MenuItem inf = new MenuItem { Header = "Infirmation About Club" };
                 inf.Click += new RoutedEventHandler(InformLogin);
                 MenuItem act = new MenuItem { Header = "Types Of Sport Activities" };
+                act.Click += new RoutedEventHandler(TypeActLogin);
                 string sqlExpression = "SELECT Title FROM Type_subscription";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -448,6 +467,7 @@ namespace FitnessClub
                 MenuItem inf = new MenuItem { Header = "Infirmation About Club" };
                 inf.Click += new RoutedEventHandler(InformLogin);
                 MenuItem act = new MenuItem { Header = "Types Of Sport Activities" };
+                act.Click += new RoutedEventHandler(TypeActLogin);
                 string sqlExpression = "SELECT Title FROM Type_subscription";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -602,34 +622,17 @@ namespace FitnessClub
 
 
 
-                            //var button1 = new Button
-                            //{
-                            //    Content = "Изменить",
-                            //};
-
-                            //var button2 = new Button
-                            //{
-                            //    Content = "Создать",
-                            //};
-
                             gr.RowDefinitions.Add(new RowDefinition());
                             gr.RowDefinitions.Add(new RowDefinition());
-                            // gr.RowDefinitions.Add(new RowDefinition());
-                            // gr.RowDefinitions.Add(new RowDefinition());
+                            
                             Grid.SetColumn(TextA, 0);
                             Grid.SetRow(TextA, 0);
                             Grid.SetColumn(TextB, 1);
                             Grid.SetRow(TextB, 1);
-                            //  Grid.SetColumn(button1, 2);
-                            //   Grid.SetRow(button1, 2);
-                            //   button1.Click += new RoutedEventHandler(EditButton);
-                            // Grid.SetColumn(button2, 3);
-                            // Grid.SetRow(button2, 3);
-                            // button2.Click += new RoutedEventHandler(EditButton2);
+                  
                             gr.Children.Add(TextA);
                             gr.Children.Add(TextB);
-                            //gr.Children.Add(button1);
-                            //gr.Children.Add(button2);
+                      
                             b.Child = gr;
 
                             gridTrainers.Children.Add(b);

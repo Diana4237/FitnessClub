@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessClub"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="AddClient" Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="TextBlock">

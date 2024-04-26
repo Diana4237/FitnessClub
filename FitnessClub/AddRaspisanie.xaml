@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessClub"
         mc:Ignorable="d"
+         WindowStartupLocation="CenterScreen"
         Title="AddRaspisanie" Height="500" Width="500">
     <Window.Resources>
         <Style TargetType="MenuItem">
@@ -47,17 +48,17 @@
         </DockPanel.Background>
         <StackPanel DockPanel.Dock="Top" Name="Menustack"></StackPanel> 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black">
-            <Label Content="Ведите время занятия:" HorizontalAlignment="Center"  />
+            <Label Content="Enter the class time:" HorizontalAlignment="Center"  />
             <TextBox x:Name="time" MaxLength="25" Text="2024-01-01 08:00:00.000" TextWrapping="Wrap"/>
-        <Label Content="Ведите номер зала:" HorizontalAlignment="Center" />
+        <Label Content="Enter the class number:" HorizontalAlignment="Center" />
             <TextBox x:Name="hall" MaxLength="100" TextWrapping="Wrap"/>
-            <Label Name="lab1" Content="Выберите фамилию тренера:" HorizontalAlignment="Center"  Visibility="Collapsed" />
+            <Label Name="lab1" Content="Choos the trainer lastname:" HorizontalAlignment="Center"  Visibility="Collapsed" />
             <ComboBox Name="staff" MaxWidth="150" Visibility="Collapsed"/>
 
-            <Label Name="lab2" Content="Выберите фамилию клиента:" HorizontalAlignment="Center" Visibility="Collapsed" />
+            <Label Name="lab2" Content="Choos the client lastname:" HorizontalAlignment="Center" Visibility="Collapsed" />
             <ComboBox Name="client" MaxWidth="150" Visibility="Collapsed" />
 
-            <Button  x:Name="button1" Click="button1_Click" Content="Добавить"/> 
+            <Button  x:Name="button1" Click="button1_Click" Content="Add"/> 
         </StackPanel>
 
     </DockPanel>

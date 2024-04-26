@@ -133,12 +133,6 @@ namespace FitnessClub
 
 
                                 }
-
-
-
-
-
-
                                 string sqlExp2 = $"SELECT Subscription FROM Staff WHERE Id_Staff={id_subsc}";
                                 using (SqlConnection connection3 = new SqlConnection(connectionString))
                                 {
@@ -160,38 +154,12 @@ namespace FitnessClub
 
 
                                 }
-
-
-
-
-
                                 list.Items.Add(reader["Date_Time"].ToString() +"_"+ type_sub) ;
                                
                             }
                         }
                     }
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             }
 
@@ -208,7 +176,13 @@ namespace FitnessClub
 
         public void EditButton(object sender, RoutedEventArgs e)
         {
-            stroka = list.SelectedItem.ToString();
+            try {
+                if (list.SelectedItem == null)
+                {
+                    MessageBox.Show("Value is not selected from the list");
+                }
+                else { 
+                stroka = list.SelectedItem.ToString();
             string[] words = stroka.Split('_');
 
              stroka = words[0];
@@ -216,20 +190,25 @@ namespace FitnessClub
 
             TextBlock Block = new TextBlock
             {
-                Text = "Выберите новое время:",
+                Text = "Choose a new time:",
             };
 
          text1.Text = stroka;
 
             Button but1 = new System.Windows.Controls.Button
             {
-                Content="Изменить",
+                Content="Edit",
             };
             but1.Click += new RoutedEventHandler(EditButton1);
             stack.Children.Add(Block);
             stack.Children.Add(text1);
             stack.Children.Add(but1);
-
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Value is not selected from the list");
+            }
 
         }
 

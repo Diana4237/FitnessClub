@@ -78,21 +78,9 @@ namespace FitnessClub
                     }
                     reader1.Close();
                 }
-
-
-
-
-
             }
             if (idRole == 2)
             {
-              
-
-
-
-               
-
-
                 string sqlExp = $"SELECT Subscription FROM Staff WHERE Id_staff='{id_user}'";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -114,9 +102,6 @@ namespace FitnessClub
 
 
                 }
-
-
-
               
             }
             if (idRole == 3)
@@ -158,13 +143,6 @@ namespace FitnessClub
                     }
                 }
 
-
-
-
-
-
-
-
                 string query3 = $"SELECT  LastName FROM Client";
 
 
@@ -194,19 +172,6 @@ namespace FitnessClub
                     }
                 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
 
 
@@ -229,11 +194,6 @@ namespace FitnessClub
             TypesActivities types = new TypesActivities(Role, User);
             types.Show();
         }
-
-
-       
-
-
         public BitmapImage GetImageFromDatabaseStaff(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -373,12 +333,6 @@ namespace FitnessClub
 
                 }
 
-
-
-
-
-
-
                 string query5 = $"SELECT Id_type_subscription FROM Type_subscription WHERE Title='{sub}'";
 
 
@@ -403,15 +357,6 @@ namespace FitnessClub
 
 
                 }
-
-
-
-
-
-
-
-
-
 
                 string query2 = $"SELECT Id_Staff FROM Staff WHERE  LastName='{stafchick}'";
 
@@ -464,13 +409,6 @@ namespace FitnessClub
 
                 }
 
-
-
-
-
-
-
-
                 string addQuery = "INSERT INTO Class VALUES (@newData, @hall, @staff )";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -487,11 +425,6 @@ namespace FitnessClub
 
                         if (rowsAffected > 0)
                         {
-
-
-
-
-
                             MessageBox.Show("Дата успешно изменена");
                         }
                         else
@@ -501,12 +434,6 @@ namespace FitnessClub
                     }
 
                 }
-
-
-
-
-
-
                 string addQuery1 = "INSERT INTO Subscription VALUES (@client, 1, @sub )";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -526,10 +453,6 @@ namespace FitnessClub
 
                 }
             }
-
-
-
-
 
             }
                 

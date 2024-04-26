@@ -206,6 +206,11 @@ namespace FitnessClub
                 Menu menu = new Menu { Background = new SolidColorBrush(Colors.Red), ItemsPanel = it };
 
                 MenuItem inf = new MenuItem { Header = "Infirmation About Club", IsEnabled = false };
+                System.Windows.Controls.MenuItem act = new System.Windows.Controls.MenuItem { Header = "Types Of Sport Activities" };
+                act.Click += new RoutedEventHandler(TypeActLogin);
+
+                System.Windows.Controls.MenuItem Train = new System.Windows.Controls.MenuItem { Header = "Trainers" };
+                Train.Click += new RoutedEventHandler(TrainersClickLogin);
                 MenuItem aadmins = new MenuItem { Header = "Admins" };
                 aadmins.Click += new RoutedEventHandler(ListAdmins);
                 MenuItem statistic = new MenuItem { Header="Dynamics of customer" };
@@ -216,6 +221,8 @@ namespace FitnessClub
                 MenuItem account = new MenuItem { Header = img, HorizontalAlignment = HorizontalAlignment.Right };
                 account.Click += new RoutedEventHandler(MyAccountClick);
                 menu.Items.Add(inf);
+                menu.Items.Add(act);
+                menu.Items.Add(Train);
                 menu.Items.Add(aadmins);
                 menu.Items.Add(statistic);
                 menu.Items.Add(account);

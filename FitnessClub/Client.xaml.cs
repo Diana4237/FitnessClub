@@ -53,10 +53,11 @@ namespace FitnessClub
                     }
                 }
             }
-            MenuItem Train = new MenuItem { Header = "Trainers", IsEnabled = false };
+            MenuItem Train = new MenuItem { Header = "Trainers" };
+            Train.Click += new RoutedEventHandler(TrainersClick);
             MenuItem time = new MenuItem { Header = "Timing" };
             time.Click += new RoutedEventHandler(TimeClick);
-            MenuItem clients = new MenuItem { Header = "Clients" };
+            MenuItem clients = new MenuItem { Header = "Clients", IsEnabled = false };
             BitmapImage bitmapImag = GetImageFromDatabaseStaff(IdUser);
             Image img = new Image { Width = 40, Source = bitmapImag };
             // Image img = new Image { Width = 40, Source = new BitmapImage(new Uri("C:\\Users\\Пользователь\\Desktop\\OOP\\FitnessClub\\FitnessClub\\images\\klipartz.com.png")) };
@@ -157,19 +158,19 @@ namespace FitnessClub
     public void TimeClick(object sender, RoutedEventArgs e)
     {
         this.Close();
-        Raspisanie t = new Raspisanie(Role, User);
+        Raspisanie t = new Raspisanie(3, User);
         t.Show();
     }
     public void MyAccountClick(object sender, EventArgs e)
     {
         this.Close();
-        MyAccount autorization = new MyAccount(Role, User);
+        MyAccount autorization = new MyAccount(3, User);
         autorization.Show();
     }
     public void TypeActLogin(object sender, RoutedEventArgs e)
     {
         this.Close();
-        TypesActivities types = new TypesActivities(Role, User);
+        TypesActivities types = new TypesActivities(3, User);
         types.Show();
     }
     public BitmapImage GetImageFromDatabaseStaff(int id)
@@ -232,7 +233,13 @@ namespace FitnessClub
         }
         return null;
     }
-    public void AddClient(object sender, EventArgs e)
+        public void TrainersClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            Trainers t = new Trainers(3, User);
+            t.Show();
+        }
+        public void AddClient(object sender, EventArgs e)
     {
         AddClient addClient = new AddClient(User);
         addClient.Show();
@@ -252,7 +259,7 @@ namespace FitnessClub
     public void InformLogin(object sender, RoutedEventArgs e)
     {
         this.Close();
-        MainWindow mainWindow = new MainWindow(Role, User);
+        MainWindow mainWindow = new MainWindow(3, User);
         mainWindow.Show();
     }
     public void TypeAct(object sender, RoutedEventArgs e)
