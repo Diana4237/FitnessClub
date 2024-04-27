@@ -41,6 +41,7 @@ namespace FitnessClub
         TextBox TextB;
         DateTime Dat;
         ListBox list1;
+        int Idclass;
 
         string type_sub;
         string connectionString = @"Data Source=-PC\MSSQLSERVER01; Initial Catalog=FitnessClub;Integrated Security=True;";
@@ -452,9 +453,53 @@ namespace FitnessClub
                     }
 
                 }
+
+                //string query6 = $"SELECT Id_Class FROM Class WHERE Date_Time='@newData',Id_Hall=@hall,Id_Staff=@staff";
+
+
+
+                //using (SqlConnection connection5 = new SqlConnection(connectionString))
+                //{
+                //    connection5.Open();
+                //    SqlCommand command1 = new SqlCommand(query6, connection5);
+                //    SqlDataReader reader1 = command1.ExecuteReader();
+
+                //    if (reader1.HasRows)
+                //    {
+
+                //        while (reader1.Read())
+                //        {
+                //            Idclass = reader1.GetInt32(0);
+
+
+                //        }
+                //    }
+                //    reader1.Close();
+
+
+                //}
+
+                //string addQuery2 = "INSERT INTO Timing VALUES ('{Idclass}', @sub )";
+
+                //using (SqlConnection connection = new SqlConnection(connectionString))
+                //{
+                //    connection.Open();
+
+                //    using (SqlCommand command = new SqlCommand(addQuery2, connection))
+                //    {
+                //        command.Parameters.AddWithValue("@client", id_client2);
+
+                //        command.Parameters.AddWithValue("@sub", id_sub);
+
+                //        int rowsAffected = command.ExecuteNonQuery();
+
+
+                //    }
+
+                //}
             }
 
-            }
+        }
                 
 
 

@@ -122,7 +122,7 @@ namespace FitnessClub
                 {
                     connection1.Open();
                     SqlCommand command2 = new SqlCommand(sqlExp1, connection1);
-                    SqlDataReader reader2 = command2.ExecuteReader();
+                 SqlDataReader reader2 = command2.ExecuteReader();
 
                     if (reader2.HasRows)
                     {
@@ -256,15 +256,15 @@ namespace FitnessClub
                 {
                     ImageBrush myBrush = new ImageBrush
                     {
-                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/StepClass.JPG"))
+                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/stretch.JPG"))
                     };
                     ImageBrush myBrush2 = new ImageBrush
                     {
-                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/step2.JPG"))
+                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/pilates2.JPG"))
                     };
                     ImageBrush myBrush3 = new ImageBrush
                     {
-                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/step1.jpeg"))
+                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/pilates3.JPG"))
                     };
                     poly1.Fill = myBrush;
                     poly2.Fill = myBrush2;
@@ -274,15 +274,15 @@ namespace FitnessClub
                 {
                     ImageBrush myBrush = new ImageBrush
                     {
-                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/StepClass.JPG"))
+                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/swim2.jpg"))
                     };
                     ImageBrush myBrush2 = new ImageBrush
                     {
-                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/step2.JPG"))
+                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/swim3.jpg"))
                     };
                     ImageBrush myBrush3 = new ImageBrush
                     {
-                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/step1.jpeg"))
+                        ImageSource = new BitmapImage(new Uri("C:/Users/Пользователь/Desktop/OOP/FitnessClub/FitnessClub/images/swim.jpeg"))
                     };
                     poly1.Fill = myBrush;
                     poly2.Fill = myBrush2;
@@ -446,17 +446,6 @@ namespace FitnessClub
                     }
                     reader2.Close();
                 }
-
-
-
-
-
-
-
-
-
-
-
             }
             if (idRole == 3)
             {
@@ -564,12 +553,6 @@ namespace FitnessClub
 
 
                             }
-
-
-
-
-
-
                             string sqlExp2 = $"SELECT Subscription FROM Staff WHERE Id_Staff={id_subsc}";
                             using (SqlConnection connection3 = new SqlConnection(connectionString))
                             {

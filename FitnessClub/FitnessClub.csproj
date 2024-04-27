@@ -269,5 +269,14 @@
   <ItemGroup>
     <Resource Include="images\salut.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\swim3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\swim2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\swim.jpeg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
